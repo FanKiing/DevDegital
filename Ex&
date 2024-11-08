@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        header nav ul li {float:left;color:black;text-decoration: none;margin-left: 50px;}
+        header nav ul li a{color:black;text-decoration: none;}
+        header nav ul {list-style: none;}
+        .banner{
+            height: 250px;
+            width: 800px;
+            }
+        #banner-container{
+            text-align: center;
+            margin-top: 70px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+    <img src="flower.png">
+    <nav>
+        <ul>
+            <li><a href="#"><i>Accueil</i></a></li>
+            <li><a href="#"><i>Presentation</i></a></li>
+            <li><a href="#"><i>Bouquetes De Fleurs</i></a></li>
+            <li><a href="#"><i>Services</i></a></li>
+            <li><a href="#"><i>Contact</i></a></li>
+        </ul>
+    </nav>
+    <br>
+    <div id="banner-container">
+        <img src="FS.jpg" class="banner">
+    </div>
+    <h2>NOTRE SELECTION DE FLEURES ET DE PLANTES</h2>
+    <style>
+        h2{
+            text-align: center;
+        }
+    </style>
+    <br>
+    <div class="bouquets">
+    <!-- Bouquet 1 -->
+    <div class="bouquet-card">
+        <h3>Bouquet 1</h3>
+        <p>Glamour : 12 fleurs sans vase</p>
+        <p class="price">190,00 DH</p>
+        <a href="#" class="order-button">Commandes</a>
+    </div>
+    
+    <!-- Bouquet 2 -->
+    <div class="bouquet-card">
+        <h3>Bouquet 2</h3>
+        <p>Purete : 15 fleurs blanches</p>
+        <p class="price">250,00 DH</p>
+        <a href="#" class="order-button">Commandes</a>
+    </div>
+
+    <!-- Bouquet 3 -->
+    <div class="bouquet-card">
+        <h3>Bouquet 3</h3>
+        <p>Mille pensees : 12 fleurs rouges</p>
+        <p class="price">300,00 DH</p>
+        <a href="#" class="order-button">Commandes</a>
+    </div>
+    <style>
+body {
+    font-family: Arial, sans-serif;
+    background-color: #fdfdfd;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+header {
+    background-color: #f9e9f9;
+    padding: 20px;
+}
+
+header img {
+    height: 50px;
+    vertical-align: middle;
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #ff99cc;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.main-banner {
+    background-color: #ffe6ff;
+    padding: 60px;
+    margin: 20px 0;
+    font-size: 24px;
+    color: #d1a3d1;
+}
+
+.bouquets {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin: 20px 10px;
+    flex-wrap: wrap;
+}
+
+.bouquet-card {
+    background-color: #fdf5f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    width: 200px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.bouquet-card h3 {
+    color: #ff66b2;
+    margin: 10px 0;
+}
+
+.bouquet-card p {
+    font-size: 14px;
+    color: #666;
+}
+
+.price {
+    font-size: 16px;
+    color: #333;
+    font-weight: bold;
+}
+
+.order-button {
+    display: inline-block;
+    padding: 8px 16px;
+    margin-top: 10px;
+    background-color: #ff99cc;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.order-button:hover {
+    background-color: #ff66b2;
+}
+
+    </style>
+</div>
+</header>
+</body>
+</html>
