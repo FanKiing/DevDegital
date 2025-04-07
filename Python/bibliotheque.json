@@ -1,0 +1,26 @@
+[
+    {
+        "id": 1,
+        "titre": "A Song of ice and fire",
+        "auteur": "George R R Martin",
+        "annee_publication": 1998,
+        "isbn": "123456789",
+        "nombre_pages": 1000
+    },
+    {
+        "id": 2,
+        "titre": "Majid",
+        "auteur": "Majin inc",
+        "annee_publication": 2022,
+        "numero": 10,
+        "frequence": "Mensuel"
+    },
+    {
+        "id": 3,
+        "titre": "Brave",
+        "auteur": "Walt Disney",
+        "annee_publication": 2021,
+        "genre_musical": "Action",
+        "duree": 70
+    }
+]

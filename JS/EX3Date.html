@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulateur de Compte à Rebours</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: 'Consolas', sans-serif;
+            margin: 20px;
+            max-width: 600px;
+        }
+
+        input, button {
+            margin: 10px 0;
+            padding: 8px;
+            background-color: #ddd;
+        }
+    </style>
+</head>
+<body>
+    <h1>Compte à Rebours</h1>
+    <label for="eventDate">Date de l'événement :</label>
+    <input type="date" id="eventDate">
+    <button onclick="calculeEventTimeRest()">Démarrer</button>
+    <input type="text" id="currentDate" placeholder="Il rest :" readonly>
+
+    <script type="text/javascript">
+        function calculeEventTimeRest() {
+            const eventDate = new Date(document.getElementById('eventDate').value);
+            const currentDate = new Date();
+
+            const diffTime = Math.abs(eventDate - currentDate);
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+            if (diffDays <= 0) {
+                document.getElementById('currentDate').value = 'Le compte à rebours est fini !';
+                return;
+            }
+
+            document.getElementById('currentDate').value = `${diffDays} jours`;
+        }
+    </script>
+</body>
+</html>

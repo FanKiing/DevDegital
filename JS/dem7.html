@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <table id="fruits">
+        <thead><tr><th>Code</th><th>nom</th><th>prix</th><th>delete</th></tr></thead>
+
+        <tbody></tbody>
+    </table>
+
+
+    <script type="text/javascript">
+
+       const listOfFuits=[{code:12,nom:"banane",prix:10},{code:13,nom:"pomme",prix:10},{code:13,nom:"fraise",prix:10}];
+       for(let f of listOfFuits){
+            let strRow=`<tr><td>${f.code}</td><td>${f.nom}</td><td>${f.prix}</td><td><button onclick="deleteFruit(event)">Delete</button></td>`;
+            document.querySelector('#fruits tbody').insertAdjacentHTML('beforeend',strRow);
+
+       }
+      function deleteFruit(event){
+       // document.querySelector('#fruits tbody').removeChild(event.target.parentElement.parentElement);
+
+       event.target.parentElement.parentElement.remove();
+
+      }
+
+
+
+
+
+    </script>
+
+
+    
+</body>
+</html>

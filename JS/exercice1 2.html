@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulateur de Calcul sur les Dates</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        label, input, select, button { display: block; margin: 10px 0; }
+    </style>
+</head>
+<body>
+
+    <h2> Simulateur de Calcul sur les Dates </h2>
+
+    <!-- Date de départ -->
+    <label for="startDate">Sélectionnez une date :</label>
+    <input type="date" id="startDate">
+
+    <!-- Ajouter/Soustraire jours, mois ou années -->
+    <label for="value"> Nombre de jours/mois/années :</label>
+    <input type="number" id="value" min="1">
+
+    <label for="type"> Type :</label>
+    <select id="type">
+        <option value="days">Jours</option>
+        <option value="months">Mois</option>
+        <option value="years">Années</option>
+    </select>
+
+    <button onclick="calculateDate('add')"> Ajouter</button>
+    <button onclick="calculateDate('subtract')"> Soustraire</button>
+
+    <h3> Nouvelle date : <span id="newDate">-</span></h3>
+
+    <!-- Comparer deux dates -->
+    <h2> Comparer deux dates</h2>
+    <label for="compareDate"> Deuxième date :</label>
+    <input type="date" id="compareDate">
+    <button onclick="compareDates()"> Calculer la différence</button>
+
+    <h3> Différence : <span id="dateDiff">-</span></h3>
+
+    <!-- Calculer l'âge -->
+    <h2> Calcul de l'âge</h2>
+    <label for="birthDate"> Date de naissance :</label>
+    <input type="date" id="birthDate">
+    <button onclick="calculateAge()">Calculer l'âge</button>
+
+    <h3>Âge : <span id="ageResult">-</span></h3>
+
+    <!-- Conversion de date -->
+    <h2> Conversion de Date</h2>
+    <button onclick="convertFormats()"> Convertir en différents formats</button>
+    <ul>
+        <li>ISO : <span id="isoFormat">-</span></li>
+        <li>Locale : <span id="localFormat">-</span></li>
+        <li>UTC : <span id="utcFormat">-</span></li>
+    </ul>
+
+    <script>
+        function calculateDate(action) {
+            let date = new Date(document.getElementById("startDate").value);
+            let value = parseInt(document.getElementById("value").value);
+            let type = document.getElementById("type").value;
+
+            if (isNaN(value) || !date.getTime()) return alert("Veuillez entrer une date et une valeur valide.");
+
+            if (type === "days") date.setDate(action === "add" ? date.getDate() + value : date.getDate() - value);
+            if (type === "months") date.setMonth(action === "add" ? date.getMonth() + value : date.getMonth() - value);
+            if (type === "years") date.setFullYear(action === "add" ? date.getFullYear() + value : date.getFullYear() - value);
+
+            document.getElementById("newDate").textContent = date.toISOString();
+        }
+
+        function compareDates() {
+            let d1 = new Date(document.getElementById("startDate").value);
+            let d2 = new Date(document.getElementById("compareDate").value);
+
+            if (!d1.getTime() || !d2.getTime()) return alert("Veuillez entrer deux dates valides.");
+
+            let diff = Math.abs(d2 - d1);
+            let days = Math.floor(diff / (1000 * 60 * 60 * 24));
+
+            document.getElementById("dateDiff").textContent = days + " jours";
+        }
+
+        function calculateAge() {
+            let birth = new Date(document.getElementById("birthDate").value);
+            let age = new Date().getFullYear() - birth.getFullYear();
+            document.getElementById("ageResult").textContent = age + " ans";
+        }
+
+        function convertFormats() {
+            let date = new Date();
+            document.getElementById("isoFormat").textContent = date.toISOString();
+            document.getElementById("localFormat").textContent = date.toLocaleDateString();
+            document.getElementById("utcFormat").textContent = date.toUTCString();
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accueil - DRGS Forum Régional</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .hero {
+            background: url('inscription2.jpg') center/cover;
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+        }
+        .footer-icons img {
+            width: 20px;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <img src="ofppt.png" alt="OFPPT" width="50"> DRGS-Forum Régional
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#">Accueil</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Agenda</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Objectifs</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Inscription
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="#">S'inscrire</a></li>
+                            <li><a class="dropdown-item" href="#">Prise de ROV</a></li>
+                            <li><a class="dropdown-item" href="#">Imprimer l'affistation</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="#">Se connecter</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <h1>Bienvenue au Forum Régional des Métiers du Tertiaire</h1>
+    </section>
+
+    <section class="container my-5">
+        <div class="card p-4">
+            <h2>Forum régional des métiers du tertiaire</h2>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas minus, consequuntur quisquam odio quis sed dolorum molestias</p>
+            <div>
+                <a href="inscription.html" class="btn btn-primary" style="display:inline-block">S'inscrire</a>
+                <a href="Aide.html" class="btn btn-secondary" style="display:inline-block">Aide ?</a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-light py-4">
+        <div class="container d-flex justify-content-between">
+            <div class="footer-icons">
+                <img src="adr.jpg" alt="Adresse"> 50 Rue Caporal Driss Chbakou Ain Borja, Casablanca
+            </div>
+            <div class="footer-icons">
+                <img src="mail.jpg" alt="Email"> drcs@ofppt.ma
+            </div>
+            <div class="footer-icons">
+                <img src="tel.jpg" alt="Téléphone"> 05 22 63 44 44 / 05 22 67 07 49
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

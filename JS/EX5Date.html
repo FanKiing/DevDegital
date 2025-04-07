@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Simulateur de Temps Restant avant la Retraite</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: 'Consolas', sans-serif;
+            margin: 20px;
+            max-width: 600px;
+        }
+
+        input, button {
+            margin: 10px 0;
+            padding: 8px;
+            background-color: #ddd;
+        }
+    </style>
+</head>
+<body>
+    <h1>Simulateur de Retraite</h1>
+    <label for="birthday">Date de naissance :</label>
+    <input type="date" id="birthday">
+    <br>
+    <label for="retraiteAge">Age de la retraite :</label>
+    <input type="number" id="retraiteAge">
+    <br>
+    <button onclick="calculeRetraireDate()">Calculer</button>
+    <input type="text" id="retraireDate" placeholder="Votre date de retraite :" readonly>
+
+    <script type="text/javascript">
+        function calculeRetraireDate() {
+            const birthday = new Date(document.getElementById('birthday').value);
+            const retraiteAge = parseInt(document.getElementById('retraiteAge').value);
+            const retraireDate = new Date();
+            retraireDate.setFullYear(birthday.getFullYear() + retraiteAge);
+            document.getElementById('retraireDate').value = retraireDate.toISOString().split('T')[0];
+
+            const diffTime = Math.abs(retraireDate - new Date());
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+            document.getElementById('retraireDate').value = `${diffDays} jours`;
+
+            const diffMonths = Math.ceil(diffTime / (1000 * 60 * 60 * 24 * 30));
+            document.getElementById('retraireDate').value = `${diffMonths} mois`;
+
+            const diffYears = Math.ceil(diffTime / (1000 * 60 * 60 * 24 * 365));
+            document.getElementById('retraireDate').value = `${diffYears} ans`;
+        }
+    </script>
+</body>
+</html>

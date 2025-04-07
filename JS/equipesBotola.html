@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liste des Équipes Marocaines</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: center;
+        }
+        img {
+            width: 50px;
+            height: 50px;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Liste des Équipes Marocaines</h2>
+
+    <table id="teamsTable">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom de l'Équipe</th>
+                <th>Logo</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Les équipes seront ajoutées dynamiquement ici -->
+        </tbody>
+    </table>
+
+    <script>
+        // Liste des équipes marocaines
+        let teams = [
+            { id: 1, name: "Wydad Casablanca", logo: "https://logowik.com/content/uploads/images/wydad-casablanca1494.logowik.com.webp" },
+            { id: 2, name: "Raja Casablanca", logo: "https://th.bing.com/th/id/R.27d69a994f8de456fc4c3c8f8a48475b?rik=5k%2bMCMiavnRb6g&pid=ImgRaw&r=0" },
+            { id: 3, name: "FUS Rabat", logo: "https://vectorseek.com/wp-content/uploads/2023/07/Fus-Rabat-Logo-Vector.jpg" }
+        ];
+
+        const tableBody = document.querySelector("#teamsTable tbody");
+          function renderTeams(){
+            tableBody.innerHTML="";
+          let strTeams=teams.map((team,pos)=>`<tr><td>${team.id}</td><td>${team.name}</td><td><img src=${team.logo}></td><td><button onclick="deleteTeam(${pos})">delete</button></td>`)
+             for(let team of strTeams){
+             tableBody.insertAdjacentHTML('beforeend',team);
+             }
+
+
+          }
+
+         function deleteTeam(pos){
+                
+           teams.splice(pos,1);
+           renderTeams();
+         }
+
+       
+
+        // Affichage initial des équipes
+        renderTeams();
+    </script>
+
+</body>
+</html>

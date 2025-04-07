@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <title>Title</title>
+        <!-- Required meta tags -->
+        <meta charset="utf-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1, shrink-to-fit=no"
+        />
+
+        <!-- Bootstrap CSS v5.2.1 -->
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+            crossorigin="anonymous"
+        />
+        <style type="text/css">
+            @keyframes colors {
+                0% {
+                    background: #333;
+                }
+                20% {
+                    background: #666;
+                }
+                40% {
+                    background: #999;
+                }
+                60% {
+                    background: #ccc;
+                }
+                80% {
+                    background: #eee;
+                }
+                100% {
+                    background: white;
+                }
+            }
+            @keyframes helicopter {
+                
+                from {
+                    transform: rotate(0deg); 
+                }
+                to {
+                    transform: rotate(360deg); 
+                }
+                
+            }
+            @font-face {
+                font-family: "GreatVibes";
+                src: url(GreatVibes-Regular.ttf);
+            }
+            .navbar-brand {
+                font-size: 2rem;
+                font-family: "GreatVibes";
+                margin-right: 30px;
+            }
+            .container {
+                margin-top: 100px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                width: 900px;
+            }
+            img {
+                width: 400px;
+                aspect-ratio: 1/1;
+                border-radius: 50%;
+                animation: helicopter 1s linear infinite;
+            }
+            .image {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 420px;
+                aspect-ratio: 1/1;
+                border-radius: 50%;
+                animation: colors 5s infinite;
+            }
+        </style>
+    </head>
+
+    <body>
+        <nav class="navbar navbar-expand-sm navbar-dark bg-info">
+            <div class="container-fluid d-flex justify-content-start">
+                <a class="navbar-brand" href="#">Da Ali Bighrdayn restaurant</a>
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Home</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" area-expanded="false" href="#">Menu</a>
+                        <ul class="dropdown-menu">
+                            <li class="dropdownitem px-3">1</li>
+                            <li class="dropdownitem px-3">2</li>
+                            <li class="dropdownitem px-3">3</li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Contact</a>
+                    </li>
+
+                </ul>
+            </div>          
+            <form action="#" method="get" role="search" class="d-flex">
+                <input type="search" placeholder="Search" name="search" class="form-control me-2">
+                <button class="btn btn-outline-light" type="submit">Search</button>
+            </form>  
+        </nav>
+        <div class="container">
+            <h1>Moroccan Flag : Almohad dynasty</h1>
+            <div class="image">
+                <img src="https://imgs.search.brave.com/dY3YL8ewzAKopEcg-sCqbqHBsfUfDpZo0udj8twrLtU/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly93d3cu/d29ybGRhdGxhcy5j/b20vci93NDI1L3Vw/bG9hZC9jNy8yZC81/YS9mbGFnLW9mLW1v/cm9jY28tdXNlZC1k/dXJpbmctYWxtb2hh/ZC1keW5hc3R5LTEx/NDctdG8tMTI0OC5w/bmc" alt="Moroccan Flag">
+
+            </div>
+        </div>
+        <!-- 
+            ul li:nthchild(odd):not(:first-child) {
+                background-color: #f1f1f1;
+                
+            }
+                @media (max-width: 768px) and (min-width: 576px) {
+                   menu a {
+                    color:orange;
+                }
+         -->
+        <input type="text" name="name" id="name" value="Bl3id" pattern="^[a-zA-Z]{3,32}$" reauired />
+
+        <script
+            src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+            integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+            crossorigin="anonymous"
+        ></script>
+
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+            integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+            crossorigin="anonymous"
+        ></script>
+    </body>
+</html>

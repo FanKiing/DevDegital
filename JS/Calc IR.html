@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css">
+    <style type="text/css">
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px; 
+        }
+        input, button {
+            margin: 5px;
+            padding: 8px; 
+        }
+    </style>
+</head>
+<body>
+    <h2>Calcul IR</h2>
+    <label for="revenu">Revenu annuel en MAD</label>
+    <input type="number" id="revenu" min="0" required>
+    <button onclick="calculerIR()">CalculerIR</button>
+    <h3>Montant du IR payer : <span id="resultat">0</span> MAD</h3>
+
+
+    <script type="text/javascript">
+        function calculerIR() {
+            let revenu = parseFloat(document.getElementById("revenu").value);
+            let impôt = 0
+            let tranche = [
+                {plafond: 30000, taux: 0},
+                {plafond: 50000, taux: 0.10},
+                {plafond: 60000, taux: 0.20},
+                {plafond: 80000, taux: 0.30},
+                {plafond: 100000, taux: 0.34},
+                {plafond: Infinity, taux: 0.38},
+            ];
+
+            let revenuRestant = revenu ;
+            let trancheInférieure = 0 ;
+
+            for (let t of tranche) {
+                if (revenu > trancheInférieure) {
+                    let texable = Math.min(revenuRestant, t.plafond - trancheInférieure);
+                    impôt +=  texable * t.taux
+                    revenuRestant -= texable
+                }
+                trancheInférieure = t.plafond
+            }
+            document.getElementById("resultat").textContent = impôt.toFixed(2);
+        }
+    </script>
+</body>
+</html>

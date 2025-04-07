@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" placeholder="Ajouter un élément">
+    <button type="button" id="addItem">Ajouter</button>
+    <ul><li></li></ul>
+
+<script type="text/javascript">
+    let input=document.querySelector('input');
+    let addItem=document.querySelector('#addItem');
+    let ul=document.querySelector('ul');
+    let li=document.querySelector('li');
+    addItem.addEventListener('click',function(){
+        let newItem=document.createElement('li');
+        newItem.textContent=input.value;
+        ul.appendChild(newItem);
+        input.value='';
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div> <input type="text" id="note">&nbsp;<button type="button" id="addNote">Ajouter</button></div>
+    <h2>Statistiques : </h2>
+    <h3><b>Moyenne : </b><span id="moy"></span></h3>
+    <h3><b>Max : </b><span id="max"></span></h3>
+    <h3><b>Min : </b><span id="min"></span></h3>
+    <h3><b>Notes > moyenne : </b><span id="bonnes"></span></h3>
+
+
+<script type="text/javascript">
+
+
+
+       let notes=[];
+       //coder le bouton #addNote
+       document.querySelector('#addNote').addEventListener('click',(event)=>{
+             let note=document.querySelector('#note').value;
+             if(note && !isNaN(note)) {
+              notes.push(parseFloat(note));
+
+              document.querySelector('#note').value='';
+              document.querySelector('#note').focus();
+              console.log(notes);
+               //Calculer les statistiques 
+               Render();
+
+             }   
+     
+
+       });
+
+       function Render(){
+          let moy=notes.reduce((acc,n)=>acc+n,0)/notes.length;
+          document.querySelector('#moy').textContent=moy.toFixed(2);
+          document.querySelector('#max').textContent=Math.max(...notes);
+          document.querySelector('#min').textContent=Math.min(...notes);
+
+          let bonnesNotes=notes.filter((x,i)=>x>=moy);
+
+      document.querySelector('#bonnes').textContent=bonnesNotes.join();
+        }
+
+
+
+
+</script>
+
+
+</body>
+</html>

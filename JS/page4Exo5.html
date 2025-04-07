@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script type="text/javascript">
+
+   let tab=new Array();
+     for(let i=0;i<16;i++){
+        tab.push(Math.round(Math.random()*15));//Math.ceil et math.floor
+     }
+      console.log(tab);
+      function nombreOcc(){
+        let randElt=tab[Math.floor(Math.random()*tab.length)];
+        console.log(randElt);
+        return tab.filter((x,i)=>x==randElt).length;
+
+      }
+     
+    console.log(nombreOcc());
+
+
+    </script>
+    
+</body>
+</html>

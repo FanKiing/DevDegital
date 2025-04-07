@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style type="text/css">
+
+        .c{
+            color:brown;
+            font-size:29px;
+            font-family:cursive;
+        }
+
+    </style>
+</head>
+<body>
+     
+    <form action="index.php" method="GET">
+      <input type="text" id="v1" placeholder="saisir v1"><br/>
+      <input type="text" id="v2" placeholder="saisir v2"><br>
+      <input type="radio" name="op" id="add" value="+" checked>&nbsp;+&nbsp;&nbsp;<input type="radio" name="op" id="soust" value="-">&nbsp;- <br>
+    <button type="button" id="calc">Calculer </button><br>
+    <div id="res"></div>
+
+
+
+    </form>
+
+
+
+
+
+
+
+
+
+
+
+    <script type="text/javascript">
+
+      //coder l event clic sur le bouton #calc
+      //console.log(typeof document.getElementById('calc'))
+      document.getElementById('calc').addEventListener('click',function(){
+                 //alert('#calc has been clicked !!!!!');
+                let value1= parseFloat(document.getElementById('v1').value);
+                let value2= parseFloat(document.getElementById('v2').value);
+                let result=document.getElementById('add').checked?value1+value2:value1-value2;
+                //window.alert(`result = ${result}`);
+                document.getElementById('res').innerHTML=`result = ${result}`;
+               /* document.getElementById('res').style.color="green";
+                document.getElementById('res').style.fontSize="28px";*/
+                document.getElementById('res').classList.add('c');//remove contains
+                
+
+
+      });
+
+
+
+
+
+    </script>
+</body>
+</html>

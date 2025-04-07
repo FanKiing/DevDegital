@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        header {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .profile-image {
+            display: block;
+            margin: 0 auto;
+            width: 150px; 
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .about-me {
+            text-align: center;
+            margin-top: 10px;
+            font-size: 18px;
+        }
+
+        .gallery {
+            text-align: center;
+            margin: 40px 0;
+        }
+
+        .gallery h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .gallery-images {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .gallery-images img {
+            width: 200px; 
+            height: auto;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            object-fit: cover;
+        }
+
+        .contact-form {
+            text-align: center;
+            margin: 40px 0;
+        }
+
+        .contact-form h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .contact-form form {
+            display: inline-block;
+            text-align: left;
+            width: 300px;
+        }
+
+        .contact-form label {
+            display: block;
+            margin: 10px 0 5px;
+            font-weight: bold;
+        }
+
+        .contact-form input,
+        .contact-form textarea,
+        .contact-form button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .contact-form button {
+            background-color: #007BFF;
+            color: white;
+            cursor: pointer;
+            border: none;
+        }
+
+        .contact-form button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="profilek.jpg" alt="Profile" class="profile-image">
+        <h1>À propos de moi</h1>
+        <p class="about-me">Je suis un développeur web passionné avec une expérience dans la création de sites modernes et performants.</p>
+    </header>
+
+    <section class="gallery">
+        <h2>Galerie de projets</h2>
+        <div class="gallery-images">
+            <img src="project1.jpg" alt="Project 1">
+            <img src="project2.jpg" alt="Project 2">
+            <img src="project3.jpg" alt="Project 3">
+        </div>
+    </section>
+
+    <section class="contact-form">
+        <h2>Contactez-moi</h2>
+        <form>
+            <label for="name">Nom :</label>
+            <input type="text" id="name" name="name" placeholder="Votre nom" required>
+
+            <label for="email">Email :</label>
+            <input type="email" id="email" name="email" placeholder="Votre email" required>
+
+            <label for="message">Message :</label>
+            <textarea id="message" name="message" placeholder="Votre message" rows="5" required></textarea>
+
+            <button type="submit">Envoyer</button>
+        </form>
+    </section>
+</body>
+</html>

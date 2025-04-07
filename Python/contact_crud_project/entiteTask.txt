@@ -1,0 +1,7 @@
+id : Identifiant unique (clé primaire, généré automatiquement).
+title : Titre de la tâche (chaîne de caractères).
+description : Description détaillée de la tâche (chaîne de caractères, texte).
+priority : Priorité (basse, moyenne, élevée - sous forme de texte ou d'entier). (co,bobox)
+status : Statut de la tâche (À faire, En cours, Terminé).( radio button)
+created_date : Date de création de la tâche. (date system Now)
+due_date : Date d'échéance. dateEntry

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestion des Contacts</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: 'Consolas', sans-serif;
+            background-color: #ddd;
+        }
+        .container {
+            max-width: 500px;
+            margin: 40px auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center mb-4">Gestion des Contacts</h1>
+        <form class="needs-validation" novalidate method="get" id="contactForm">
+            <div class="mb-3">
+                <label for="name" class="form-label">Nom</label>
+                <input type="text" class="form-control" id="name" placeholder="Nom" required>
+                <div class="invalid-feedback">Veuillez entrer un nom valide.</div>
+                <div class="valid-feedback">Nom valide !</div>
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" placeholder="Email" required>
+                <div class="invalid-feedback">Veuillez entrer un email valide.</div>
+                <div class="valid-feedback">Email valide !</div>
+            </div>
+            <div class="mb-3">
+                <label for="phone" class="form-label">Numéro de téléphone</label>
+                <input type="tel" class="form-control" id="phone" placeholder="Numéro de téléphone" required pattern="[0-9]{10}">
+                <div class="invalid-feedback">Veuillez entrer un numéro valide.</div>
+                <div class="valid-feedback">Numéro de téléphone valide !</div>
+            </div>
+            <div class="mb-3">
+                <label for="picture" class="form-label">Photo de profil</label>
+                <input type="file" class="form-control" id="picture" accept="image/*">
+                <div class="invalid-feedback">Veuillez sélectionner une image valide.</div>
+            </div>
+            
+            <button type="submit" id="save" class="btn btn-primary">Enregistrer</button>
+        </form>
+
+        <div class="table-responsive mt-4">
+            <table class="table table-striped table-bordered text-center">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Nom</th>
+                        <th>Email</th>
+                        <th>Numéro de téléphone</th>
+                        <th>Image</th>
+                        <th>Modifier/Supprimer</th>
+                    </tr>
+                </thead>
+                <tbody id="myContact"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        let contacts = JSON.parse(localStorage.getItem('contacts')) || [];
+
+        document.getElementById('contactForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            if (this.checkValidity()) {
+                saveContact();
+                this.reset();
+            }
+            this.classList.add('was-validated');
+        });
+
+        function saveContact() {
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const picture = document.getElementById('picture').files[0];
+
+            const contact = {
+                name: name,
+                email: email,
+                phone: phone,
+                picture: picture ? URL.createObjectURL(picture) : null
+            };
+
+            contacts.push(contact);
+            localStorage.setItem('contacts', JSON.stringify(contacts));
+            displayContacts();
+        }
+
+        function displayContacts() {
+            const myContact = document.getElementById('myContact');
+            myContact.innerHTML = '';
+            contacts.forEach((contact, index) => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${contact.name}</td>
+                    <td>${contact.email}</td>
+                    <td>${contact.phone}</td>
+                    <td>${contact.picture ? `<img src="${contact.picture}" alt="${contact.name}" width="80">` : 'No Image'}</td>
+                    <td>
+                        <button class="btn btn-warning btn-sm me-2" onclick="editContact(${index})">Modifier</button>
+                        <button class="btn btn-danger btn-sm" onclick="deleteContact(${index})">Supprimer</button>
+                    </td>
+                `;
+                myContact.appendChild(row);
+            });
+        }
+
+        function editContact(index) {
+            const contact = contacts[index];
+            document.getElementById('name').value = contact.name;
+            document.getElementById('email').value = contact.email;
+            document.getElementById('phone').value = contact.phone;
+            contacts.splice(index, 1);
+            localStorage.setItem('contacts', JSON.stringify(contacts));
+            displayContacts();
+        }
+
+        function deleteContact(index) {
+            contacts.splice(index, 1);
+            localStorage.setItem('contacts', JSON.stringify(contacts));
+            displayContacts();
+        }
+
+        displayContacts();
+    </script>
+</body>
+</html>

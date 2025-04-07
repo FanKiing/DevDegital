@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+</head>
+<body>
+    <div class="container w-75 mx-auto my-3">
+        <h2>Achat Livres</h2>
+        <label for="titres">Choisir votre livre:</label>
+
+        <select name="titres" id="titres" class="form-select">
+          <option value="" selected disabled>choisir un titre</option>
+        </select>
+        <table class="table table-hover my-2" id="listLivres"></table>
+        <table class="table table-hover my-2" id="cartListe"></table>
+    </div>
+
+    <script type="text/javascript">
+       let books=[
+        {ISBN:12000,titre:'programmation en javascript',image:'livre.png',prix:150},
+        {ISBN:130000,titre:'programmation en python',image:'livre.png',prix:100},
+        {ISBN:14000,titre:'programmation en php',image:'livre.png',prix:200},
+        {ISBN:15000,titre:'programmation en Csharp',image:'livre.png',prix:125}
+       ];
+       let cart=[];
+
+     //au chargement de la page alimenter l element select par les distincts titres
+
+   document.querySelector('#titres').innerHTML+=books.map((b,pos)=>`<option value=${b.ISBN}>${b.titre}</option>`).join('');
+
+   //gerer l evenement change du select #titres
+   document.getElementById('titres').onchange=(e)=>{
+             
+          let bookId=e.target.value;
+          let selected=books.find((b,pos)=>b.ISBN==bookId);
+          let strSelected=`<tr><td colspan="2" class="fw-bold">Livres : ${selected.ISBN}</td></tr>
+                           <tr><td>Titre</td><td>${selected.titre}</td></tr> 
+                           <tr><td>Prix</td><td>${selected.prix}</td></tr>
+                           <tr><td>Image</td><td><img src="${selected.image}" width="80px" height="80px"/></td></tr>
+                           <tr><td><button class="btn btn-primary" onclick="Ajouter(${selected.ISBN})">Ajouter au panier</button></td><td><button class="btn btn-danger" onclick="Retirer(${selected.ISBN})">Retirer du panier</button></td></tr>
+                           `;
+            
+         document.querySelector('#listLivres').innerHTML=strSelected;
+
+
+   }
+
+   //gerer l event click sur le bouton Ajouter
+
+     const Ajouter=(isbn)=>{
+               let objInCart=books.find((b,pos)=>b.ISBN==isbn);
+               let res=cart.find((c,pos)=>c.ISBN==isbn);
+               if(res){
+                res.qte+=1;
+               }
+               else{
+                 cart.push({...objInCart,qte:1});//... spread operator
+
+               }
+             console.log(cart);
+             console.log(getTotalAmount());
+
+     }
+
+     const Retirer=(isbn)=>{
+        let objInCart=cart.find((c,pos)=>c.ISBN==isbn);
+        if(objInCart){
+            if(objInCart.qte>1){
+                objInCart.qte-=1;
+            }
+            else{
+                cart=cart.filter((c,pos)=>c.ISBN!=isbn);
+            }
+        }
+        console.log(cart);
+        console.log(getTotalAmount());
+     }
+
+//calcul total amount
+
+
+const getTotalAmount=()=>{
+   return cart.reduce((acc,item)=>acc+=item.prix*item.qte,0);
+    /*let acc=0;
+    for(let item of cart){
+        acc+=item.prix;
+    */
+
+
+}
+
+</script>
+</body>
+</html>

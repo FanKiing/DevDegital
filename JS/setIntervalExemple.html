@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+<script type="text/javascript">
+  const getRandomColor=()=>{
+       const ascii='0123456789ABCDEF';
+       let color='#';
+       for(let i=0;i<6;i++){
+             let pos= Math.floor(Math.random()*ascii.length);
+             color=color+ascii[pos];
+       }
+       return color;
+  }
+
+  let counter=0;
+
+  function changeColor(){
+      window.document.body.style.backgroundColor=getRandomColor();
+      counter++;
+       console.log(counter);
+      if (counter==10) window.clearInterval(period);
+
+  }
+
+ let period=window.setInterval(changeColor,2000);
+
+
+
+
+
+
+
+
+</script>
+
+
+
+    
+</body>
+</html>

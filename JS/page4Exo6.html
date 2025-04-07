@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script type="text/javascript">
+      let tab=new Array();
+            /*for(let i=0;i<16;i++){
+                tab.push(Math.round(Math.random()*15));//Math.ceil et math.floor
+            }
+      console.log(tab);*/ 
+      tab=[1,2,3,4];
+
+      const EstTrie=()=>{
+
+            for(i=0;i<tab.length-1;i++){
+                if(tab[i]>tab[i+1]){
+                    return false;
+                }
+            }
+
+           return true;
+
+      }
+
+     console.log(EstTrie());
+
+
+    </script>
+
+</body>
+</html>

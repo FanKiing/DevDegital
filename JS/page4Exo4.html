@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+<script type="text/javascript">
+    let tab=new Array();
+     for(let i=0;i<10;i++){
+        tab.push(Math.round(Math.random()*91));//Math.ceil et math.floor
+     }
+    console.log(tab);
+
+     let randElt=tab[Math.floor(Math.random()*tab.length)];
+     console.log(randElt);
+     /*let search=-1;
+     for(let i in tab){
+        if(tab[i]==randElt){
+            search=i;
+            break;
+        }
+     }*/  
+    search=tab.indexOf(randElt);
+     console.log(search);
+
+</script>
+
+
+    
+</body>
+</html>

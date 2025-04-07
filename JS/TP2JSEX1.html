@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css">
+    <style type="text/css">
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+        }
+
+        .calculator-container {
+            width: 400px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            text-align: center;
+            margin: 50px auto;
+        }
+
+        .calculator-header {
+            background: black;
+            color: white;
+            padding: 10px;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .gender-selection {
+            margin: 15px 0;
+            font-size: 14px;
+            color: black;
+        }
+
+        input[type="radio"] {
+            margin: 0 5px;
+        }
+
+        .input-label {
+            color: black;
+            font-size: 14px;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .input-field {
+            width: 80%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            text-align: center;
+            font-size: 16px;
+            margin-bottom: 15px;
+        }
+
+        .calculate-button {
+            background: #ff1493;
+            color: white;
+            border: none;
+            padding: 10px;
+            font-size: 16px;
+            width: 100%;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .calculate-button:hover {
+            background: #d81376;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator-container">
+        <div class="calculator-header">Calculatrice de l'Indice de Masse Corporelle (IMC)</div>
+
+        <div class="gender-selection">
+            <label>Vous êtes</label><br>
+            <input type="radio" name="gender" value="female" checked> Une femme
+            <input type="radio" name="gender" value="male"> Un homme
+        </div>
+
+        <label class="input-label">Votre âge</label>
+        <input type="number" class="input-field" id="age">
+
+        <label class="input-label">Votre taille (cm)</label>
+        <input type="number" class="input-field" id="height">
+
+        <label class="input-label">Votre poids (KG)</label>
+        <input type="number" class="input-field" id="weight">
+
+        <button class="calculate-button" onclick="calculateIMC()">CALCULER</button>
+
+        <div id="result"></div>
+    </div>
+
+    <script type="text/javascript">
+        function calculateIMC() {
+            const ageInput = document.getElementById('age');
+            const heightInput = document.getElementById('height');
+            const weightInput = document.getElementById('weight');
+            const resultDiv = document.getElementById('result');
+
+            const height = parseFloat(heightInput.value) / 100; 
+            const weight = parseFloat(weightInput.value);
+
+            if (isNaN(height) || isNaN(weight) || height <= 0 || weight <= 0) {
+                resultDiv.innerText = "Veuillez entrer des valeurs valides.";
+                return;
+            }
+
+            const imc = (weight / (height * height)).toFixed(2);
+
+            resultDiv.innerText = `Votre IMC est : ${imc}`;
+        }
+    </script>
+</body>
+</html>

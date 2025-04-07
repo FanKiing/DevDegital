@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ma To-Do List</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f6f9;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            text-align: center;
+            color: #4A90E2;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .task-container {
+            width: 90%;
+            max-width: 700px;
+        }
+
+        .task {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .task:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .task p {
+            margin: 0;
+            font-size: 1.2em;
+            font-weight: 500;
+            color: #2c3e50;
+        }
+
+        .task span {
+            padding: 8px 16px;
+            border-radius: 25px;
+            font-size: 0.9em;
+            text-transform: uppercase;
+            font-weight: bold;
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            transition: background-color 0.3s ease;
+        }
+
+        .urgent {
+            background-color: #e74c3c;
+            color: white;
+        }
+
+        .important {
+            background-color: #f39c12;
+            color: white;
+        }
+
+        .moyenne {
+            background-color: #3498db;
+            color: white;
+        }
+
+        .basse {
+            background-color: #2ecc71;
+            color: white;
+        }
+
+        .termine {
+            background-color: #7f8c8d;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="task-container">
+        <h1>Ma To-Do List</h1>
+
+        <div class="task">
+            <p>Terminer le projet de React</p>
+            <span class="urgent">Urgent</span>
+        </div>
+
+        <div class="task">
+            <p>Préparer la présentation pour la réunion</p>
+            <span class="important">Important</span>
+        </div>
+
+        <div class="task">
+            <p>Faire les courses pour la semaine</p>
+            <span class="moyenne">Moyenne</span>
+        </div>
+
+        <div class="task">
+            <p>Regarder un tutoriel sur CSS avancé</p>
+            <span class="basse">Basse</span>
+        </div>
+
+        <div class="task">
+            <p>Nettoyer le bureau</p>
+            <span class="termine">Terminé</span>
+        </div>
+    </div>
+</body>
+</html>

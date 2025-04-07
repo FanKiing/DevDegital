@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+   <ul id="kids">
+
+   </ul>
+
+  <script type="text/javascript">
+     const listOfKids=[{id:100,fname:'aaa bbb',age:5},{id:101,fname:'ccc ddd',age:4}];
+     for(let k of listOfKids){
+          let newItem=`<li>${k.id}-${k.fname}-${k.age}</li>`;
+          document.querySelector('#kids').insertAdjacentHTML('beforeend',newItem);
+
+
+
+     }
+
+
+
+
+
+
+
+
+
+
+  </script>
+    
+</body>
+</html>

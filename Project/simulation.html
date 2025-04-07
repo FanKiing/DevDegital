@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulation Salaire Employé OFPPT</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: 'Consolas', sans-serif;
+            background-color: #ddd;
+        }
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h2 class="text-center">Simulation Salaire Employé OFPPT en ligne</h2>
+        <br>
+        <form>
+            <div class="row mb-3">
+                <div class="col-md-3">
+                    <label class="form-label">Échelle</label>
+                    <select class="form-select">
+                        <option selected>choisir votre échelle</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label">Échelon</label>
+                    <select class="form-select">
+                        <option selected>choisir votre échelon</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label">Niveau Enseigné</label>
+                    <select class="form-select">
+                        <option selected>choisir Niveau...</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label">Votre indice est :</label>
+                    <input type="text" class="form-control">
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-md-4">
+                    <label class="form-label">Salaire de base</label>
+                    <input type="text" class="form-control">
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label">Prime résidence</label>
+                    <input type="text" class="form-control">
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label">Prime Transport</label>
+                    <input type="text" class="form-control">
+                </div>
+            </div>
+            
+            <div class="row mb-3">
+                <div class="col-md-4">
+                    <label class="form-label">Retraite RCAR</label>
+                    <input type="text" class="form-control">
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label">Mutuelle ATLANTA</label>
+                    <input type="text" class="form-control">
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label">IR</label>
+                    <input type="text" class="form-control">
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-md-4">
+                    <label class="form-label">Allocation Familiale</label>
+                    <select class="form-select">
+                        <option selected>Nombre enfants...</option>
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label">Indemnité Qualification</label>
+                    <input type="text" class="form-control">
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label">Indemnité Logement</label>
+                    <input type="text" class="form-control">
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Salaire Net à recevoir est :</label>
+                <input type="text" class="form-control" readonly>
+            </div>
+
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary">Simulation de Salaire</button>
+            </div>
+        </form>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript">
+        
+    </script>
+</body>
+</html>

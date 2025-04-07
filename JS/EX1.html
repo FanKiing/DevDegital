@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulateur de Calcul sur les Dates</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1>Simulateur de Calcul sur les Dates</h1>
+        <form id="dateCalculator">
+            <div class="form-group">
+                <label for="startDate">Sélectionnez une date :</label>
+                <input type="date" class="form-control" id="startDate" required>
+            </div>
+
+            <div class="form-group">
+                <label>Nombre de jours/mois/années :</label>
+                <input type="number" class="form-control" id="quantity" required>
+                <select class="form-control" id="type">
+                    <option value="days">Jours</option>
+                    <option value="months">Mois</option>
+                    <option value="years">Années</option>
+                </select>
+                <div class="form-check">
+                    <input type="radio" class="form-check-input" name="operation" value="add" checked> Ajouter
+                    <input type="radio" class="form-check-input" name="operation" value="subtract"> Soustraire
+                </div>
+            </div>
+
+            <button type="button" class="btn btn-primary" onclick="calculateNewDate()">Calculer la nouvelle date</button>
+
+            <div class="form-group mt-3">
+                <label for="newDate">Nouvelle date :</label>
+                <input type="text" class="form-control" id="newDate" readonly>
+            </div>
+
+            <div class="form-group">
+                <label>Comparer deux dates :</label>
+                <input type="date" class="form-control" id="compareDate">
+                <button type="button" class="btn btn-secondary mt-2" onclick="compareDates()">Calculer la différence</button>
+            </div>
+
+            <div class="form-group">
+                <label for="difference">Différence :</label>
+                <input type="text" class="form-control" id="difference" readonly>
+            </div>
+
+            <div class="form-group">
+                <label>Calcul de l'âge :</label>
+                <input type="date" class="form-control" id="birthDate">
+                <button type="button" class="btn btn-info mt-2" onclick="calculateAge()">Calculer l'âge</button>
+            </div>
+
+            <div class="form-group">
+                <label for="age">Âge :</label>
+                <input type="text" class="form-control" id="age" readonly>
+            </div>
+
+            <div class="form-group">
+                <label>Conversion de Date :</label>
+                <button type="button" class="btn btn-warning" onclick="convertDate()">Convertir en différents formats</button>
+                <div class="mt-2">
+                    <label>ISO :</label>
+                    <input type="text" class="form-control" id="isoDate" readonly>
+                    <label>Locale :</label>
+                    <input type="text" class="form-control" id="localeDate" readonly>
+                    <label>UTC :</label>
+                    <input type="text" class="form-control" id="utcDate" readonly>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        function calculateNewDate() {
+            const startDate = new Date(document.getElementById('startDate').value);
+            const quantity = parseInt(document.getElementById('quantity').value);
+            const type = document.getElementById('type').value;
+            const operation = document.querySelector('input[name="operation"]:checked').value;
+
+            let newDate = new Date(startDate);
+
+            if (operation === 'add') {
+                if (type === 'days') newDate.setDate(startDate.getDate() + quantity);
+                else if (type === 'months') newDate.setMonth(startDate.getMonth() + quantity);
+                else if (type === 'years') newDate.setFullYear(startDate.getFullYear() + quantity);
+            } else {
+                if (type === 'days') newDate.setDate(startDate.getDate() - quantity);
+                else if (type === 'months') newDate.setMonth(startDate.getMonth() - quantity);
+                else if (type === 'years') newDate.setFullYear(startDate.getFullYear() - quantity);
+            }
+
+            document.getElementById('newDate').value = newDate.toISOString().split('T')[0];
+        }
+
+        function compareDates() {
+            const startDate = new Date(document.getElementById('startDate').value);
+            const compareDate = new Date(document.getElementById('compareDate').value);
+            const diffTime = Math.abs(compareDate - startDate);
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+            document.getElementById('difference').value = `${diffDays} jours`;
+        }
+
+        function calculateAge() {
+            const birthDate = new Date(document.getElementById('birthDate').value);
+            const today = new Date();
+            let age = today.getFullYear() - birthDate.getFullYear();
+            const monthDifference = today.getMonth() - birthDate.getMonth();
+            if (monthDifference < 0 || (monthDifference === 0 && today.getDate() < birthDate.getDate())) {
+                age--;
+            }
+            document.getElementById('age').value = `${age} ans`;
+        }
+
+        function convertDate() {
+            const startDate = new Date(document.getElementById('startDate').value);
+            document.getElementById('isoDate').value = startDate.toISOString();
+            document.getElementById('localeDate').value = startDate.toLocaleDateString();
+            document.getElementById('utcDate').value = startDate.toUTCString();
+        }
+    </script>
+</body>
+</html>

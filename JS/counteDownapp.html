@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <label for="dateEvent">Date Evenemement</label>
+
+     <input type="date" id="dateEvent" /><br>
+     <button id="btnStart">Start Count Down</button><button id="btnStop">Stop Count Down</button>
+    <div id="res"></div>
+
+
+    <script type="text/javascript">
+        
+        const getTime=()=>{
+            let now=new Date();
+           let eventD=new Date(document.querySelector('#dateEvent').value);
+           let diff=eventD-now;
+           if(diff<0){
+            alert('event deja passe ');
+            return
+           }
+           console.log(diff);
+           let jours=Math.floor(diff/(1000*60*60*24))
+           let heurs=Math.floor((diff/(1000*60*60))%24)
+           let minutes=Math.floor((diff/(1000*60))%60)
+           let seconds=Math.floor((diff/1000)%60)
+           document.getElementById('res').innerText=`${jours} jours ,${heurs} heures , ${minutes} minutes et ${seconds} seconds`;
+
+        }
+        document.getElementById('btnStart').addEventListener('click',function(){
+
+              interval=setInterval(getTime,1000);
+
+
+        });
+
+   document.getElementById('btnStop').addEventListener('click',function(){
+
+             window.clearInterval(interval);
+
+
+        });
+
+
+    </script>
+
+</body>
+</html>

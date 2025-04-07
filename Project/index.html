@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestion des Employés</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: 'Consolas', sans-serif;
+            background-color: #ddd;
+        }
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .table-responsive {
+            margin-top: 20px;
+        }
+        .total-section {
+            margin-top: 20px;
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mb-4">
+        <h1>Gestion des Employés</h1>
+        <br>
+        <h5>Ajouter un Employé</h5>
+        <form action="#" method="POST">
+            <div class="mb-3">
+                <label for="matricule" class="form-label">Matricule</label>
+                <input type="text" id="matricule" name="matricule" class="form-control" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="lastName" class="form-label">Nom</label>
+                <input type="text" id="lastName" name="lastName" class="form-control" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="firstName" class="form-label">Prénom</label>
+                <input type="text" id="firstName" name="firstName" class="form-control">
+            </div>
+
+            <div class="mb-3">
+                <label for="echelle" class="form-label">Échelle</label>
+                <select id="echelle" name="echelle" class="form-control">
+                    <option value="" hidden>Choisissez...</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                    <option value="14">14</option>
+                    <option value="15">15</option>
+                    <option value="20">20</option>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label for="echelon" class="form-label">Échelon</label>
+                <select id="echelon" name="echelon" class="form-control">
+                    <option value="" hidden>Choisissez...</option>
+                    <option value="3">3</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label for="photo" class="form-label">Photo</label>
+                <input type="file" id="photo" name="photo" class="form-control">
+            </div>
+
+            <button type="submit" class="btn btn-primary" onclick="addEmployer()">+ Ajouter</button>
+        </form>
+        <br>
+
+        <h5>Liste des Employés</h5>
+
+        <div class="table-responsive mt-4">
+            <table class="table table-striped table-bordered text-center" id="myTable">
+                <thead class="table-light">
+                    <tr>
+                        <th>Photo</th>
+                        <th>Matricule</th>
+                        <th>Nom</th>
+                        <th>Prénom</th>
+                        <th>Échelle</th>
+                        <th>Échelon</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="tbody"></tbody>
+            </table>
+        </div>
+
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+        const tbody = document.querySelector('#tbody');
+        const form = document.querySelector('form');
+        const matricule = document.querySelector('#matricule');
+        const lastName = document.querySelector('#lastName');
+        const firstName = document.querySelector('#firstName');
+        const echelle = document.querySelector('#echelle');
+        const echelon = document.querySelector('#echelon');
+        const photo = document.querySelector('#photo');
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const matriculeValue = matricule.value;
+            const lastNameValue = lastName.value;
+            const firstNameValue = firstName.value;
+            const echelleValue = echelle.value;
+            const echelonValue = echelon.value;
+            const photoValue = photo.value;
+
+            tbody.innerHTML += `
+                <tr>
+                    <td><img src="${photoValue}" alt="Photo" width="50" height="50"></td>
+                    <td>${matriculeValue}</td>
+                    <td>${lastNameValue}</td>
+                    <td>${firstNameValue}</td>
+                    <td>${echelleValue}</td>
+                    <td>${echelonValue}</td>
+                    <td>
+                        <button class="btn btn-primary"><i class="bi bi-eye"></i></button>
+                        <button class="btn btn-warning"><i class="bi bi-pencil-square"></i></button>
+                        <button class="btn btn-danger"><i class="bi bi-trash-fill"></i></button>
+                    </td>
+                </tr>
+            `;
+
+            form.reset();
+        });
+
+        
+    </script>
+</body>
+</html>

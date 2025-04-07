@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUD V2</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: 'Consolas', sans-serif;
+            background-color: #ddd;
+        }
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center mb-4">Gestion des tâches</h1>
+        <form id="stainMenu">
+            <div class="mb-3">
+                <input type="text" id="stain" class="form-control" placeholder="Ajouter une nouvelle tâche">
+                <button type="submit" class="btn btn-primary" onclick="addStain()">Ajouter</button>
+            </div>
+        </form>
+
+        <ul id="stainList" class="list-group"></ul>
+    </div>
+
+    <script type="text/javascript">
+        let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+
+        function addStain() {
+            const stain = document.getElementById('stain').value.trim();
+
+            if (stain === '') {
+                alert('Veuillez entrer une tâche');
+                return;
+            }
+
+            const task = {
+                text: stain,
+                completed: false
+            };
+
+            tasks.push(task);
+
+            localStorage.setItem('tasks', JSON.stringify(tasks));
+
+            const li = document.createElement('li');
+            li.classList.add('list-group-item');
+            li.innerHTML = stain;
+
+            const deleteButton = document.createElement('button');
+            deleteButton.classList.add('btn', 'btn-danger', 'float-right');
+            deleteButton.textContent = 'Supprimer';
+            deleteButton.addEventListener('click', () => {
+                tasks = tasks.filter(t => t.text !== stain);
+                localStorage.setItem('tasks', JSON.stringify(tasks));
+
+                li.remove();
+            });
+
+            li.appendChild(deleteButton);
+
+            li.addEventListener('click', () => {
+                li.classList.toggle('completed');
+                const taskIndex = tasks.findIndex(t => t.text === stain);
+                tasks[taskIndex].completed = !tasks[taskIndex].completed;
+                localStorage.setItem('tasks', JSON.stringify(tasks));
+            });
+
+            document.getElementById('stainList').appendChild(li);
+            document.getElementById('stain').value = '';
+        }
+
+        tasks.forEach(task => {
+            const li = document.createElement('li');
+            li.classList.add('list-group-item');
+            li.innerHTML = task.text;
+
+            const deleteButton = document.createElement('button');
+            deleteButton.classList.add('btn', 'btn-danger', 'float-right');
+            deleteButton.textContent = 'Supprimer';
+            deleteButton.addEventListener('click', () => {
+                tasks = tasks.filter(t => t.text !== task.text);
+                localStorage.setItem('tasks', JSON.stringify(tasks));
+
+                li.remove();
+            });
+
+            li.appendChild(deleteButton);
+
+            li.addEventListener('click', () => {
+                li.classList.toggle('completed');
+                const taskIndex = tasks.findIndex(t => t.text === task.text);
+                tasks[taskIndex].completed = !tasks[taskIndex].completed;
+                localStorage.setItem('tasks', JSON.stringify(tasks));
+            });
+
+            if (task.completed) {
+                li.classList.add('completed');
+            }
+
+            document.getElementById('stainList').appendChild(li);
+        });
+    </script>
+</body>
+</html>

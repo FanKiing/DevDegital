@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Commander des films</title>
+    <link rel="icon" type="image/png" href="movie.jpg">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <style>
+        body {
+            font-family: 'Consolas', sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+        .navbar {
+            position: absolute;
+            top: 0;
+            z-index: 1000;
+            background-color: #f8f9fa;
+            width: 100%;
+        }
+        .navbar-brand img {
+            width: 50px;
+            height: auto;
+        }
+        .navbar-nav .nav-link {
+            font-family: 'Consolas', sans-serif;
+            color: black;
+            padding: 10px 15px;
+        }
+        .container {
+            text-align: center;
+        }
+        .row {
+            justify-content: center;
+        }
+        .film-card {
+            background-color: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin: 10px;
+            width: 220px;
+            text-align: center;
+        }
+        .film-card img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+        .reset-button {
+            background-color: red;
+            color: white;
+        }
+    </style>
+</head>
+<body onload="charger()">
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <img src="movie.jpg" alt="Movies Station Logo"> MOVIES STATION
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#addMovieModal">Add Movies</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Log In</a></li>
+                    <li class="nav-item">
+                        <select id="genre" class="form-select" onchange="afficherFilms(this.value)">
+                            <option value="all">Tous les films</option>
+                            <option value="Action">Action</option>
+                            <option value="Drama">Drama</option>
+                            <option value="Comedy">Comedy</option>
+                        </select>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+    <h1>Commander des films</h1>
+    <div class="container">
+        <div class="row" id="film-list"></div>
+    </div>
+    <div id="panier"></div>
+    <div id="total"></div>
+    <button class="reset-button" onclick="resetPanier()">Reset Panier</button>
+    
+    <div class="modal fade" id="addMovieModal" tabindex="-1" aria-labelledby="addMovieModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addMovieModalLabel">Ajouter un film</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="text" id="movieTitle" class="form-control" placeholder="Nom du film">
+                    <input type="text" id="movieImage" class="form-control mt-2" placeholder="URL de l'image">
+                    <input type="number" id="moviePrice" class="form-control mt-2" placeholder="Prix">
+                    <input type="text" id="movieCategory" class="form-control mt-2" placeholder="Catégorie">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                    <button type="button" class="btn btn-primary" onclick="ajouterFilm()">Ajouter</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        const films = [
+            { ID: "001", titre: "WALL-E", image: "wall-e.jpg", prix: 10, category: "Animation" },
+            { ID: "002", titre: "Rise of the Guardians", image: "rise-of-the-gardians.jpg", prix: 15, category: "Action" },
+            { ID: "003", titre: "The Wild Robot", image: "the-wild-robot.jpg", prix: 12, category: "Adventure" }
+        ];
+        let panier = [];
+        let total = 0;
+
+        function charger() {
+            afficherFilms('all');
+        }
+
+        function afficherFilms(category) {
+            const filmList = document.getElementById('film-list');
+            filmList.innerHTML = '';
+            films.filter(f => category === 'all' || f.category === category).forEach(film => {
+                filmList.innerHTML += `
+                    <div class='col-md-4 d-flex justify-content-center'>
+                        <div class='film-card'>
+                            <img src='${film.image}' alt='${film.titre}'>
+                            <h3>${film.titre}</h3>
+                            <p>Prix: $${film.prix}</p>
+                            <button onclick="ajouterAuPanier('${film.ID}')">Ajouter</button>
+                        </div>
+                    </div>`;
+            });
+        }
+
+        function ajouterAuPanier(id) {
+            const film = films.find(f => f.ID === id);
+            panier.push(film);
+            total += film.prix;
+            Swal.fire('Ajouté!', `${film.titre} a été ajouté au panier.`, 'success');
+            afficherPanier();
+        }
+
+        function afficherPanier() {
+            const panierDiv = document.getElementById('panier');
+            panierDiv.innerHTML = '<h3>Panier</h3>' + panier.map(f => `<p>${f.titre} - $${f.prix}</p>`).join('');
+            document.getElementById('total').innerHTML = `<h3>Total: $${total}</h3>`;
+        }
+
+        function resetPanier() {
+            Swal.fire({
+                title: "Êtes-vous sûr?",
+                text: "Votre panier sera vidé!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#d33",
+                cancelButtonColor: "#3085d6",
+                confirmButtonText: "Oui, réinitialiser!"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    panier = [];
+                    total = 0;
+                    afficherPanier();
+                    Swal.fire("Réinitialisé!", "Votre panier a été vidé.", "success");
+                }
+            });
+        }
+
+        function ajouterFilm() {
+            const titre = document.getElementById('movieTitle').value;
+            const image = document.getElementById('movieImage').value;
+            const prix = parseFloat(document.getElementById('moviePrice').value);
+            const category = document.getElementById('movieCategory').value;
+            const newFilm = { ID: String(films.length + 1).padStart(3, '0'), titre, image, prix, category };
+            films.push(newFilm);
+            if (titre && image && !isNaN(prix) && prix > 0) {
+                Swal.fire('Ajouté!', `${newFilm.titre} a été ajouté au catalogue.`, 'success');
+            } else {
+                Swal.fire('Erreur', 'Veuillez entrer des valeurs valides.', 'error');
+            }
+            afficherFilms('all');
+        }
+    </script>
+</body>
+</html>

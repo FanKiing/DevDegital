@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EFM</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: white;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+        }
+
+        .nav-container {
+            display: flex;
+            gap: 10px;
+            background-color: #333;
+            justify-content: center;
+            padding: 10px;
+        }
+
+        .nav-container a {
+            display: flex;
+            align-items: center;
+            justify-items: center;
+            padding: 8px 12px;
+            border-radius: 5px;
+            text-decoration: none;
+            color: white;
+            position: relative;
+            transition: background-color 0.3s;
+            font-size: 14px;
+        }
+
+        .side-bar {
+            background-color: #f7f7f7;
+            padding: 20px;
+            border: 1px solid #ddd;
+            width: 200px;
+            height: 300px;
+            position: absolute;
+        }
+
+        .side-bar h4 {
+            margin-top: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            height: 800px;
+            padding: 20px;
+            background-color: white
+        }
+
+        .container h4 {
+            margin-top: 0;
+        }
+
+        .widgets-area {
+            background-color: #f7f7f7;
+            padding: 20px;
+            border: 1px solid #ddd;
+            width: 200px;
+            height: 300px;
+            position: absolute;
+            top: 54px;
+            right: 0px;
+        }
+
+        .widgets-area h4 {
+            margin-top: 0;
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            clear: both;
+        }
+
+        @media (max-width: 768px) {
+            .side-bar {
+                position: static;
+                width: 100%;
+                height: auto;
+                margin-bottom: 20px;
+            }
+
+            .widgets-area {
+                position: static;
+                width: 100%;
+                height: auto;
+                margin-top: 20px;
+            }
+        }
+        @media (max-width: 480px) {
+            .nav-container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .nav-container a {
+                margin-bottom: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="nav-container">
+        <a href="#">Navigation</a>
+    </div>
+    
+    <div class="side-bar">
+        <h4>Sidebar</h4>
+    </div>
+    
+    <div class="container">
+        <h4>Main Content</h4>
+    </div>
+    
+    <div class="widgets-area">
+        <h4>Widgets</h4>
+    </div>
+        
+    <footer>footer</footer>
+</body>
+</html>

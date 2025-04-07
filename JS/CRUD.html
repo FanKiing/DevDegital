@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <title>PlayStation Store</title>
+    <style>
+        body {
+            font-family: 'Consolas', sans-serif;
+            background-color: white;
+            margin: 20px;
+            padding: 0;
+        }
+        
+        .navbar {
+            background-color: gray;
+            padding: 1rem;
+        }
+        
+        .navbar-brand {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        
+        .navbar-brand img {
+            width: 30px;
+            height: 30px;
+            margin-right: 10px;
+        }
+        
+        .nav-link {
+            color: black;
+            transition: color 0.2s ease;
+        }
+        
+        .search-input {
+            width: 200px;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        
+        .search-btn {
+            background-color: black;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+        
+        .search-btn:hover {
+            background-color: #444;
+        }
+
+        .game-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .game-item {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            width: 200px;
+            text-align: center;
+        }
+
+        .game-item img {
+            width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <img src="PlayStation.png" alt="Playstation Logo"> PlayStation Store
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <form class="d-flex" role="search">
+                            <input class="form-control me-2" type="search" placeholder="Search" id="searchInput" aria-label="Search">
+                            <button class="btn btn-outline-success me-2" type="button" onclick="findGame()">Search</button>
+                        </form>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="#">Accueil</a></li>
+                    <li class="nav-item">
+                        <select id="category" class="form-select" onchange="filterGames()">
+                            <option value="all">All games</option>
+                            <option value="Action-Adventure">Action-Adventure</option>
+                            <option value="RPG">RPG</option>
+                            <option value="Action">Action</option>
+                            <option value="OpenWorld">Open World</option>
+                        </select>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="#">Se connecter</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <h1>Welcome ^_^</h1>
+        <p>I wish you to find the game you're looking for.</p>
+        <p>Click on this button to find your game 👇</p>
+        <div class="game-list" id="gameList"></div>
+    </div>
+
+    <script>
+        const games = [
+            {
+                id: 1,
+                name: "God of War Ragnarök",
+                category: "Action-Adventure",
+                platform: ["PS5", "PS4"],
+                price: 69.99,
+                cover: "https://upload.wikimedia.org/wikipedia/en/thumb/e/ee/God_of_War_Ragnar%C3%B6k_cover.jpg/220px-God_of_War_Ragnar%C3%B6k_cover.jpg"
+            },
+            {
+                id: 2,
+                name: "Devil May Cry 5",
+                category: "Action RPG",
+                platform: ["PS4", "Xbox One", "PC"],
+                price: 39.99,
+                cover: "https://upload.wikimedia.org/wikipedia/en/c/cb/Devil_May_Cry_5.jpg"
+            },
+            {
+                id: 3,
+                name: "Assassin's Creed Valhalla",
+                category: "Action RPG",
+                platform: ["PS5", "PS4", "Xbox Series X", "Xbox One", "PC"],
+                price: 59.99,
+                cover: "https://m.media-amazon.com/images/I/61yqLyV-rTL._AC_SL1024_.jpg"
+            },
+            {
+                id: 4,
+                name: "Grand Theft Auto V",
+                category: "Open World",
+                platform: ["PS5", "PS4", "Xbox Series X", "Xbox One", "PC"],
+                price: 29.99,
+                cover: "https://media.rockstargames.com/rockstargames/img/global/news/upload/actual_1364906194.jpg"
+            },
+            {
+                id: 5,
+                name: "Elden Ring",
+                category: "Action RPG",
+                platform: ["PS5", "PS4", "Xbox Series X", "Xbox One", "PC"],
+                price: 59.99,
+                cover: "https://upload.wikimedia.org/wikipedia/en/b/b9/Elden_Ring_Box_art.jpg"
+            },
+            {
+                id: 6,
+                name: "Red Dead Redemption 2",
+                category: "Open World",
+                platform: ["PS4", "Xbox One", "PC"],
+                price: 49.99,
+                cover: "https://image.jeuxvideo.com/medias/165165/1651652506-3619-jaquette-avant.jpg"
+            },
+            {
+                id: 7,
+                name: "The Witcher 3: Wild Hunt",
+                category: "Action RPG",
+                platform: ["PS5", "PS4", "Xbox Series X", "Xbox One", "PC", "Nintendo Switch"],
+                price: 39.99,
+                cover: "https://image.api.playstation.com/vulcan/ap/rnd/202211/0711/qezXTVn1ExqBjVjR5Ipm97IK.png"
+            },
+            {
+                id: 8,
+                name: "Cyberpunk 2077",
+                category: "RPG",
+                platform: ["PS5", "PS4", "Xbox Series X", "Xbox One", "PC"],
+                price: 49.99,
+                cover: "https://upload.wikimedia.org/wikipedia/en/9/9f/Cyberpunk_2077_box_art.jpg"
+            },
+            {
+                id: 9,
+                name: "Black Myth Wukong",
+                category: "Action RPG",
+                platform: ["PS5", "PC"],
+                price: 69.99,
+                cover: "https://upload.wikimedia.org/wikipedia/en/a/a6/Black_Myth_Wukong_cover_art.jpg"
+            },
+            {
+                id: 10,
+                name: "The Legend of Zelda: Breath of the Wild",
+                category: "Action-Adventure",
+                platform: ["Nintendo Switch"],
+                price: 59.99,
+                cover: "https://upload.wikimedia.org/wikipedia/en/thumb/c/c6/The_Legend_of_Zelda_Breath_of_the_Wild.jpg/220px-The_Legend_of_Zelda_Breath_of_the_Wild.jpg"
+            },
+            {
+                id: 11,
+                name: "Spider-Man Remastered",
+                category: "Action-Adventure",
+                platform: ["PS5", "PC"],
+                price: 59.99,
+                cover: "https://image.api.playstation.com/vulcan/ap/rnd/202009/3021/BtsjAgHT9pqHRXtN9FCk7xc8.png"
+            }
+        ];
+
+
+        function findGame() {
+            const searchValue = document.getElementById("searchInput").value.toLowerCase();
+            const filteredGames = games.filter(g => g.name.toLowerCase().includes(searchValue));
+            displayGames(filteredGames);
+        }
+
+        function filterGames() {
+            const category = document.getElementById("category").value;
+            const filteredGames = category === "all" ? games : games.filter(g => g.category === category);
+            displayGames(filteredGames);
+        }
+
+        function displayGames(gameList) {
+            const gameListContainer = document.getElementById("gameList");
+            gameListContainer.innerHTML = "";
+            gameList.forEach(game => {
+                gameListContainer.innerHTML += `
+                    <div class="game-item">
+                        <img src="${game.cover}" alt="${game.name}">
+                        <h3>${game.name}</h3>
+                        <p>${game.category}</p>
+                        <p>${game.platform.join(", ")}</p>
+                        <p>$${game.price}</p>
+                        <button class="btn btn-primary">Ajouter</button>
+                    </div>`;
+            });
+        }
+
+        searchForm.searchInput.onkeyup=(e)=>{
+            let v = e.target.value.trim().toLowerCase();
+            let filteredGames = games.filter((g,pos)=>g.name.toLowerCase().includes(v));
+            findGame(filteredGames);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Liste de fruits</h2>
+    <ul id="fl">
+        <li>Banane - 10DH</li>
+        <li>Pomme - 15DH</li>
+        <li>Orange - 6DH</li>
+    </ul>
+    
+
+    <script type="text/javascript">
+
+          let newItem=document.createElement('li');
+          newItem.textContent='Kiwi - 30DH';
+          let parent=document.querySelector('#fl');
+          let secondChild=parent.children[1];
+          //document.querySelector('#fl').appendChild(newItem);
+
+            //document.querySelector('#fl').prepend(newItem);
+            parent.insertBefore(newItem,secondChild);
+
+          
+
+
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+  <div class="container w-75 my-4 mx-auto">
+   <div class="mb-3 d-flex"><input type="text" class="form-control" id="textTodo"/> <button class="btn btn-primary" id="btnAdd">Add</button></div>
+    <div class="mb-3">
+      <ul id="taskList">
+
+
+
+
+      </ul>
+    </div>
+  </div>
+
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+
+      
+/*document.querySelectorAll('.cs').forEach((item,pos)=>{
+                item.onchange=(e)=>{
+                  alert('clicked !!!');
+                   //e.target.nextElementSibling.style.textDecoration= e.target.checked?'line-through':'normal';
+                   console.log(item.value);
+
+                }
+
+
+
+        }
+    )*/ 
+    let tasks=localStorage.getItem('tasks')?JSON.parse(localStorage.getItem('tasks')):[];
+    var editItem=null;
+ //********************************************Display Data***********************************************
+    const displayData=()=>{
+           document.querySelector('#taskList').innerHTML="";
+
+
+            tasks.forEach((item,pos) => {
+              let newRow=`<li class="d-flex justify-content-between"><div><input type="checkbox" value=${item.id} onclick="toggleState(event)"/> <span>${item.text}</span> </div><div><button onclick="editTask(${pos})">Edit</button><button>delete</button></div></li>`;
+             document.querySelector('#taskList').insertAdjacentHTML('beforeend',newRow);
+              
+            });
+
+
+
+    }
+//********************************************End Display data
+
+
+    // definir editTask********************************************************
+       const editTask=(pos)=>{
+            document.querySelector('#textTodo').value=tasks[pos].text;
+            editItem=tasks[pos];
+
+
+       }
+
+    // ****************end editTask**********************************************
+
+
+
+    //appeler displayData au chargement de la page 
+    displayData();
+
+
+//******************************************Toggle state *******************************************
+    const toggleState=(e)=>{
+    
+
+      e.target.nextElementSibling.style.textDecoration=e.target.checked?'line-through':'none';
+     let changedTask=tasks.find((item)=>item.id==e.target.value);
+     changedTask.state=e.target.checked?'done':"EnCours";
+     console.table(tasks);
+
+    }
+//************************************end toggle state**************************************************
+//************************************add/update******************************************************* 
+      document.querySelector('#btnAdd').onclick=()=>{
+                let textTodo=document.querySelector("#textTodo").value;
+                if(textTodo.trim().length>0){
+                    if(editItem==null){
+
+
+                   let newTask={id:tasks.length>0?tasks[tasks.length-1].id+1:1,text:textTodo,state:'enCours'};
+                   
+                    tasks.push(newTask);
+                   
+
+                    }else{
+                           
+                      editItem.text=document.querySelector('#textTodo').value;
+               
+
+                    }
+                    displayData();
+                    localStorage.setItem('tasks',JSON.stringify(tasks));
+                    document.querySelector("#textTodo").value="";
+
+                }
+                else{
+                  alert('vous devez saisir une tache !!!!');
+                }
+
+
+
+          }     
+        
+//*********************************************end add/update****************************************************************
+    </script>
+</body>
+</html>

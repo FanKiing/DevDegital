@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulateur de Durée d'un Prêt</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: 'Consolas', sans-serif;
+            margin: 20px;
+            max-width: 600px;
+        }
+
+        input, button {
+            margin: 10px 0;
+            padding: 8px;
+            background-color: #ddd;
+        }
+    </style>
+</head>
+<body>
+    <h1>Simulateur de Prêt</h1>
+    <label>Date de début :</label>
+    <input type="date" id="dateDebut">
+    <br>
+    <label>Durée (en mois): </label>
+    <input type="number" id="duree">
+    <button onclick="calculerPret()">Calculer la date de fin</button>
+    <input type="text" id="dateFin" placeholder="Votre date de fin du prêt" readonly>
+
+    <script type="text/javascript">
+        function calculerPret() {
+            var dateDebut = new Date(document.getElementById('dateDebut').value);
+            var duree = parseInt(document.getElementById('duree').value);
+            var dateFin = new Date(dateDebut.getFullYear(), dateDebut.getMonth() + duree, dateDebut.getDate());
+            document.getElementById('dateFin').value = dateFin.toISOString().split('T')[0];
+        }
+    </script>
+</body>
+</html>

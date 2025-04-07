@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #4169E1;
+            --secondary-color: #FF4D4D;
+        }
+
+        .navbar-brand {
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+
+        .nav-link {
+            color: #333 !important;
+            font-weight: 500;
+        }
+
+        .contact-btn {
+            background-color: #FFD700;
+            color: #333 !important;
+            padding: 0.5rem 1.5rem;
+            border-radius: 25px;
+        }
+
+        .hero-section {
+            padding: 5rem 0;
+            background-color: #f8f9fa;
+        }
+
+        .profile-img {
+            max-width: 100%;
+            border-radius: 10px;
+        }
+
+        .social-links {
+            margin-top: 2rem;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border: 2px solid #FFD700;
+            border-radius: 50%;
+            color: #333;
+            margin-right: 1rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background-color: #FFD700;
+            color: white;
+        }
+
+        .btn-cv {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 0.5rem 2rem;
+            border-radius: 25px;
+            text-decoration: none;
+            margin-right: 1rem;
+        }
+
+        .btn-hire {
+            background-color: #333;
+            color: white;
+            padding: 0.5rem 2rem;
+            border-radius: 25px;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <img src="https://picsum.photos/200/200" width="30" hight="30" alt="Logo" class="rounded-circle">
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">About Me</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Services</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Testimonials</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Features</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">FAQ</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Blogs</a>
+                    </li>
+                </ul>
+                <a href="#" class="nav-link contact-btn">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <p class="text-muted mb-2">Hey I'm</p>
+                    <h1 class="display-4 mb-4">Mohamed<span style="color: var(--primary-color)">Elouafy</span></h1>
+                    <p class="text-muted mb-4">Graphics Designer/Web Developer</p>
+                    
+                    <div class="d-flex mb-4">
+                        <a href="#" class="btn-cv">Download CV</a>
+                        <a href="#" class="btn-hire">Hire Me</a>
+                    </div>
+                    
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <img src="https://picsum.photos/200/300" alt="James Doe" class="profile-img">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+</body>
+</html>

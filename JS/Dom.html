@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<body>
+
+    <div class="w-50 mx-auto my-3 p-2">
+     <form action="#" method="Get">
+         <div class="mb-3">
+
+            <label for="v1">Valeur 1</label>
+            <input type="text" id="v1" class="form-control"/>
+
+         </div>
+         <div class="mb-3">
+
+            <label for="op">Operateur</label>
+            <select  id="op" class="form-control">
+               <option value="+" selected>addition</option>
+               <option value="-">Soustraction</option>
+               <option value="*">Multiplication</option>
+            </select>
+
+         </div>
+         <div class="mb-3">
+
+            <label for="v2">Valeur 2</label>
+            <input type="text" id="v2" class="form-control"/>
+
+         </div>
+         <div class="mb-3">
+
+            <button type="button" id="btn" class="btn btn-primary mb-2">Calculer</button>
+            <input type="text" id="result" readonly class="form-control"/>
+
+         </div>
+
+
+
+     </form>
+
+    </div>
+
+
+
+     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+    <script type="text/javascript">
+           
+         //l ojet js document offre des méthodes pour accéder aux attributs des contrôles 
+         //document.getElementById('id')  => acceder à un element by id
+             // *****autrement : document.querySelector('#id')
+
+        //on peut associer ecouteur à un event d'un controle donne
+        /*document.querySelector('#id').addEventListener('eventName',function(){
+                   ce script s'execute une fois l event detecte sur l elt selectionne
+               })*/
+          //le clic sur  #btn declenche :    
+                    //step 1 : recuepere les valeurs des inputs  #v1 et #v2 et le sleect #op
+                    //step 2 : calculer le resultat de l'operation
+                    //step3 :  attribuer ce resultat à l attribut value de l input #result
+          
+      //gérer l event clic sur le bouton
+      document.querySelector('#btn').addEventListener('click',function(){
+                  let valeur1=document.querySelector('#v1').value;
+                  let valeur2=document.querySelector('#v2').value;
+                  let operator=document.querySelector('#op').value;
+                  let ch=`${valeur1}${operator}${valeur2}`;
+                 // console.log(eval(ch));
+                 document.querySelector('#result').value=eval(ch);
+      });
+
+
+
+
+
+
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" name="nom" required pattern="[A-Za-z]+" />
+
+    <form name="frmsomme">
+        <fieldset>
+            <legend>Somme de deux nombres</legend>
+            <input type="number" name="n1"> +
+            <input type="number" name="n2"> -
+            <input type="number" name="somme">
+            <br>
+            <input type="button" name="btnCalculer" value="Calculer">
+            <input type="button" name="btnEffacer" value="Effacer">
+        </fieldset>
+    </form>
+
+
+
+
+
+    <script type="text/javascript">
+        let toutLesFormulaires = document.forms;
+        let monFormulaire = document.forms[0];
+        let myFormulaire = document.noForm;
+        let toutLesElements = monFormulaire.elements;
+        let unElementParIndex = monFormulaire.elements[index];
+        let unElementParNom = monFormulaire.elements['nomElement'];
+        let oneElementByName = monFormulaire.nomElement;
+        let valeurElement = unElementParNom.value;
+        unElementParNom.value = 'Nouvelle valeur'
+        unElementParNom.methode();
+
+        monFormulaire.onsubmit- function(event){
+            event.preventDefault();
+        }
+
+        monFormulaire.addEventListener('rest', function(event){
+            event.preventDefault();
+        })
+
+        const btnCalculer = monFormulaire.btnCalculer;
+        btnCalculer.onclick = function(event){
+        }
+
+        const frmsomme = document.frmsomme;
+        const btnCalculer = frmsomme.btnCalculer;
+        const btnEffacer = frmsomme.btnEffacer;
+        const inN1 = frmsomme.n1;
+        const inN2 = frmsomme.n2;
+        const outsomme = frmsomme.somme;
+
+        btnCalculer.addEventListener('click', function(event){
+            let n1 = parseFloat(inN1.value);
+            let n2 = parseFloat(inN2.value);
+            let somme = n1+n2;
+            outsomme = somme
+        })
+
+        btnEffacer.onclick = function(event){
+            inN1.value = '';
+            inN2.value = '';
+            outsomme.value = '';
+        }
+
+    </script>
+</body>
+</html>

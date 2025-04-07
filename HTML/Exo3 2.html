@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style type="text/css">
+        * {
+            box-sizing: border-box;
+        }
+
+        .container {
+            text-align: center;
+            display:flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .flag {
+            background-color: #c22229;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: auto;
+            animation: rotate 2s ease-in-out infinite;
+
+        }
+
+     
+
+        @keyframes rotate {
+            0%{}
+            100% {
+                rotate: 360deg;
+            }
+        }
+
+        .star {
+            object-fit: contain;
+            max-width: 80%;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Morocco Flag</h1>
+        <div class="flag">
+            <img src="./GreenStar.png" alt="Green Star" class="star">
+        </div>
+    </div>
+</body>
+</html>

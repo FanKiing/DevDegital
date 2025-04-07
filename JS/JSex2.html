@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Convertisseur de monnaie</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .fieldset {
+            max-width: 300px;
+            margin: 0 auto;
+            border: 1px solid #ccc;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+
+        .form {
+            display: block;
+            margin: 10px 0 5px;
+        }
+
+        input[type="text"], select {
+            width: 100%;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            margin: 5px;
+            padding: 5px 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #f5f5f5;
+        }
+
+        #messageErreur {
+            color: red;
+            font-size: 0.9em;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Convertisseur de monnaie :</h1>
+    <fieldset class="fieldset">
+        <legend>Informations personnelles:</legend>
+        <form onsubmit="return false;">
+            <label for="montant">Montant en DH :</label>
+            <input type="text" name="montant" id="montant">
+            <br>
+            <label for="convertir">Convertir en :</label>
+            <select id="devise">
+                <option value="EURO">EURO</option>
+                <option value="DOLLAR">DOLLAR</option>
+            </select>
+            <br>
+            <label for="resultat">Résultat en :</label>
+            <input type="text" name="resultat" id="resultat" readonly>
+            <br>
+            <button id="calculer" onclick="calculer()">Calculer</button>
+            <button id="effacer" onclick="effacer()">Effacer</button>
+            <div id="messageErreur"></div>
+        </form>
+    </fieldset>
+
+    <script type="text/javascript">
+        function effacer() {
+            document.getElementById("montant").value = "";
+            document.getElementById("resultat").value = "";
+            document.getElementById("montant").style.border = "";
+            document.getElementById("messageErreur").innerText = "";
+            document.getElementById("montant").focus();
+        }
+
+        function calculer() {
+            const montantElem = document.getElementById("montant");
+            const resultatElem = document.getElementById("resultat");
+            const devise = document.getElementById("devise").value;
+            const messageErreur = document.getElementById("messageErreur");
+
+            montantElem.style.border = "";
+            messageErreur.innerText = "";
+
+            const montant = montantElem.value.trim();
+            if (!montant || isNaN(montant) || parseFloat(montant) <= 0) {
+                montantElem.style.border = "2px solid red";
+                messageErreur.innerText = "Veuillez entrer un montant valide en DH.";
+                montantElem.focus();
+                return;
+            }
+
+            const montantNum = parseFloat(montant);
+            let resultat = 0;
+            if (devise === "EURO") {
+                resultat = montantNum / 12;
+            } else if (devise === "DOLLAR") {
+                resultat = montantNum / 8;
+            }
+
+            resultatElem.value = resultat.toFixed(2);
+        }
+    </script>
+</body>
+</html>

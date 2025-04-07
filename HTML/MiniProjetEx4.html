@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Derniers Articles</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .navbar {
+      background: #333;
+      color: #fff;
+      padding: 1rem 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .navbar .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+      margin-left: 1rem;
+    }
+
+    .navbar .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 1rem;
+      margin-right: 1rem;
+    }
+
+    .navbar .nav-links a {
+      color: #fff;
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .navbar .nav-links a:hover {
+      color: #ccc;
+    }
+
+    .articles {
+      text-align: center;
+      padding: 2rem 0;
+    }
+
+    .articles-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+
+    .card img {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 50%;
+      margin: 1rem auto;
+    }
+
+    .card-content {
+      padding: 1rem;
+    }
+
+    .card h2 {
+      font-size: 1.25rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .card p {
+      font-size: 0.9rem;
+      color: #555;
+      margin-bottom: 1rem;
+    }
+
+    .btn {
+      display: inline-block;
+      background: #007bff;
+      color: #fff;
+      padding: 0.5rem 1rem;
+      text-decoration: none;
+      border-radius: 4px;
+      transition: background 0.2s ease;
+    }
+
+    .btn:hover {
+      background: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="container">
+      <a href="#" class="logo">Blog</a>
+      <ul class="nav-links">
+        <li><a href="#">Accueil</a></li>
+        <li><a href="#">À propos</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <section class="articles">
+    <h1>Derniers articles</h1>
+    <div class="articles-container">
+      <div class="card">
+        <img src="prfile.jpeg" alt="Image">
+        <div class="card-content">
+          <h2>Titre de l'article</h2>
+          <p>Résumé de l'article...</p>
+          <a href="#" class="btn">Lire la suite</a>
+        </div>
+      </div>
+      <div class="card">
+        <img src="prfile.jpeg" alt="Image">
+        <div class="card-content">
+          <h2>Titre de l'article</h2>
+          <p>Résumé de l'article...</p>
+          <a href="#" class="btn">Lire la suite</a>
+        </div>
+      </div>
+      <div class="card">
+        <img src="prfile.jpeg" alt="Image">
+        <div class="card-content">
+          <h2>Titre de l'article</h2>
+          <p>Résumé de l'article...</p>
+          <a href="#" class="btn">Lire la suite</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</body>
+</html>

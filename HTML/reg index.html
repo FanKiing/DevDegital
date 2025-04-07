@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Index</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        header {
+            font-family: sans-serif;
+            color: blue;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            gap: 15px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: black;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        nav ul li a:hover {
+            text-decoration: underline;
+            font-weight: bold;
+        }
+
+        .container {
+            position: relative;
+            margin: 10px;
+            padding: 15px;
+            border-radius: 20px;
+            background-color: rgb(160, 220, 123);
+        }
+
+        .container p:hover {
+            border: 2px solid blue;
+        }
+
+        .footer a {
+            text-decoration: none;
+        }
+
+        @media screen and (max-width:700px) {
+            .container {
+                display: block;
+                width: 100%;
+            }
+        }
+
+        input[type="submit"]:focus {
+            background-color: black;
+            color: white;
+        }
+
+        .equal-img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light py-1">
+        <div class="header">
+            <a class="navbar-brand" href="#">
+                <img src="ofppt.png" alt="OFPPT" width="30">OFPPT Pole Digital
+            </a>
+        </div>
+    </nav>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse bg-dark box d-flex space-between rounded-2" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item"><a class="nav-link text-white" href="#">Acceuil</a></li>
+                <li class="nav-item"><a class="nav-link text-white" href="#">FULLSTACK</a></li>
+                <li class="nav-item"><a class="nav-link text-white" href="#">MOBILE</a></li>
+                <li class="nav-item"><a class="nav-link text-white" href="#">RVRA</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <h4 class="text-center mb-4">Développement Digital</h4>
+        <div class="row">
+            <div class="col-md-4">
+                <img src="img2.jpg" class="img-fluid equal-img mb-3">
+                <p class="text-start">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quis doloremque doloribus sunt labore, fugiat hic reprehenderit sapiente!</p>
+                <button type="button" class="btn btn-primary">Voir Détails</button>
+            </div>
+            <div class="col-md-4">
+                <img src="img.jpg" class="img-fluid equal-img mb-3">
+                <p class="text-start">Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio consequatur optio totam numquam obcaecati neque ullam ratione.</p>
+                <button type="button" class="btn btn-primary">Voir Détails</button>
+            </div>
+            <div class="col-md-4">
+                <img src="zahad.png" class="img-fluid equal-img mb-3">
+                <p class="text-start">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis doloremque doloribus sunt labore, fugiat hic reprehenderit sapiente!</p>
+                <button type="button" class="btn btn-primary">Voir Détails</button>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-light text-center py-3 mt-5">
+        <button type="submit" class="btn btn-primary">
+            <a href="inscrire.html" class="text-white text-decoration-none">S'inscrire</a>
+        </button>
+        <p class="mt-2 mb-0">2024 OFPPT Pole Digital - Tous droits réservés.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

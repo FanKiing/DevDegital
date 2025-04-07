@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajouter un élément</title>
+    <style>
+           
+        #container {
+            margin-top: 10px;
+        }
+        p {
+            font-weight: bold;
+        }
+
+    </style>
+</head>
+<body>
+    <button id="addParagraphBtn">Ajouter un paragraphe</button>
+    <div id="container"></div>
+
+    <script type="text/javascript">
+        let count = 1
+
+        document.getElementById("addParagraphBtn").addEventListener("click" , function() {
+            let p = document.createElement("p");
+            p.textContent = "Paragraphe numéro" + count;
+            document.getElementById("container").appendChild(p);
+            count++;
+        })
+    </script>
+</body>
+</html>

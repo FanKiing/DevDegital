@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestion des Employés</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+        body {
+            font-family: 'Consolas', sans-serif;
+            background-color: #ddd;
+        }
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .table-responsive {
+            margin-top: 20px;
+        }
+        .modal-img {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mb-4">
+        <h1>Gestion des Employés</h1>
+        <br>
+        <h5>Ajouter un Employé</h5>
+        <form id="employeeForm">
+            <div class="mb-3">
+                <label for="matricule" class="form-label">Matricule</label>
+                <input type="text" id="matricule" name="matricule" class="form-control" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="lastName" class="form-label">Nom</label>
+                <input type="text" id="lastName" name="lastName" class="form-control" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="firstName" class="form-label">Prénom</label>
+                <input type="text" id="firstName" name="firstName" class="form-control">
+            </div>
+
+            <div class="mb-3">
+                <label for="echelle" class="form-label">Échelle</label>
+                <select id="echelle" name="echelle" class="form-control" required>
+                    <option value="" hidden>Choisissez...</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                    <option value="14">14</option>
+                    <option value="15">15</option>
+                    <option value="20">20</option>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label for="echelon" class="form-label">Échelon</label>
+                <select id="echelon" name="echelon" class="form-control" required>
+                    <option value="" hidden>Choisissez...</option>
+                    <option value="3">3</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label for="photo" class="form-label">Photo</label>
+                <input type="file" id="photo" name="photo" class="form-control">
+            </div>
+
+            <button type="submit" class="btn btn-primary">+ Ajouter</button>
+        </form>
+        <br>
+
+        <h5>Liste des Employés</h5>
+
+        <div class="table-responsive mt-4">
+            <table class="table table-striped table-bordered text-center" id="myTable">
+                <thead class="table-light">
+                    <tr>
+                        <th>Photo</th>
+                        <th>Matricule</th>
+                        <th>Nom</th>
+                        <th>Prénom</th>
+                        <th>Échelle</th>
+                        <th>Échelon</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="tbody"></tbody>
+            </table>
+        </div>
+
+        <div class="modal fade" id="editModal" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Modifier Employé</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <input type="hidden" id="editIndex">
+                        <label>Nom</label>
+                        <input type="text" id="editLastName" class="form-control">
+                        <label>Prénom</label>
+                        <input type="text" id="editFirstName" class="form-control">
+                        <label>Échelle</label>
+                        <select id="editEchelle" class="form-control">
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                            <option value="11">11</option>
+                            <option value="12">12</option>
+                            <option value="14">14</option>
+                            <option value="15">15</option>
+                            <option value="20">20</option>
+                        </select>
+                        <label>Échelon</label>
+                        <select id="editEchelon" class="form-control">
+                            <option value="3">3</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                        </select>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                        <button type="button" class="btn btn-success" id="saveChanges">Enregistrer</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="showEmployeeModal" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Détails de l'Employé</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <img id="showPhoto" src="" alt="Photo" class="modal-img">
+                        <p><strong>Matricule:</strong> <span id="showMatricule"></span></p>
+                        <p><strong>Nom:</strong> <span id="showLastName"></span></p>
+                        <p><strong>Prénom:</strong> <span id="showFirstName"></span></p>
+                        <p><strong>Échelle:</strong> <span id="showEchelle"></span></p>
+                        <p><strong>Échelon:</strong> <span id="showEchelon"></span></p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+        const tbody = document.querySelector('#tbody');
+        const form = document.querySelector('#employeeForm');
+        const editModal = new bootstrap.Modal(document.getElementById('editModal'));
+        const showModal = new bootstrap.Modal(document.getElementById('showEmployeeModal'));
+        let employees = [];
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const matriculeValue = form.matricule.value;
+            const lastNameValue = form.lastName.value;
+            const firstNameValue = form.firstName.value;
+            const echelleValue = form.echelle.value;
+            const echelonValue = form.echelon.value;
+            const photoValue = form.photo.files[0] ? URL.createObjectURL(form.photo.files[0]) : 'default.png';
+
+            const employee = {
+                matricule: matriculeValue,
+                lastName: lastNameValue,
+                firstName: firstNameValue,
+                echelle: echelleValue,
+                echelon: echelonValue,
+                photo: photoValue
+            };
+
+            employees.push(employee);
+            renderTable();
+            form.reset();
+            Swal.fire('Succès', 'Employé ajouté avec succès', 'success');
+        });
+
+        function renderTable() {
+            tbody.innerHTML = employees.map((employee, index) => `
+                <tr>
+                    <td><img src="${employee.photo}" alt="Photo" width="50" height="50"></td>
+                    <td>${employee.matricule}</td>
+                    <td>${employee.lastName}</td>
+                    <td>${employee.firstName}</td>
+                    <td>${employee.echelle}</td>
+                    <td>${employee.echelon}</td>
+                    <td>
+                        <button class="btn btn-primary" onclick="showEmployee(${index})"><i class="bi bi-eye"></i></button>
+                        <button class="btn btn-warning" onclick="editEmployee(${index})"><i class="bi bi-pencil-square"></i></button>
+                        <button class="btn btn-danger" onclick="deleteEmployee(${index})"><i class="bi bi-trash-fill"></i></button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function showEmployee(index) {
+            const employee = employees[index];
+            document.getElementById('showMatricule').textContent = employee.matricule;
+            document.getElementById('showLastName').textContent = employee.lastName;
+            document.getElementById('showFirstName').textContent = employee.firstName;
+            document.getElementById('showEchelle').textContent = employee.echelle;
+            document.getElementById('showEchelon').textContent = employee.echelon;
+            document.getElementById('showPhoto').src = employee.photo;
+            showModal.show();
+        }
+
+        function editEmployee(index) {
+            const employee = employees[index];
+            document.getElementById('editIndex').value = index;
+            document.getElementById('editLastName').value = employee.lastName;
+            document.getElementById('editFirstName').value = employee.firstName;
+            document.getElementById('editEchelle').value = employee.echelle;
+            document.getElementById('editEchelon').value = employee.echelon;
+            editModal.show();
+        }
+
+        document.getElementById('saveChanges').addEventListener('click', () => {
+            const index = document.getElementById('editIndex').value;
+            employees[index].lastName = document.getElementById('editLastName').value;
+            employees[index].firstName = document.getElementById('editFirstName').value;
+            employees[index].echelle = document.getElementById('editEchelle').value;
+            employees[index].echelon = document.getElementById('editEchelon').value;
+            renderTable();
+            editModal.hide();
+            Swal.fire('Succès', 'Employé modifié avec succès', 'success');
+        });
+
+        function deleteEmployee(index) {
+            Swal.fire({
+                title: 'Supprimer ?',
+                text: 'Êtes-vous sûr de vouloir supprimer cet employé ?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Oui, supprimer !'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    employees.splice(index, 1);
+                    renderTable();
+                    Swal.fire('Supprimé', 'Employé supprimé avec succès', 'success');
+                }
+            });
+        }
+    </script>
+</body>
+</html>

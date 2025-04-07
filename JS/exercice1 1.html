@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculateur IMC</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background-color: #f4f4f4;
+    }
+    .container {
+      width: 80%;
+      margin: 50px auto;
+      background: white;
+      padding: 20px;
+      border-top-right-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    .header {
+      background: black;
+      color: white;
+      padding: 10px;
+      font-weight: bold;
+      border-top-right-radius: 10px;
+    }
+    .radio-group {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 15px;
+    }
+    .radio-group input {
+      margin-left: 5px;
+    }
+    .input-row {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 15px;
+    }
+    .input-group {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex: 1;
+    }
+    label {
+      font-size: 14px;
+      font-weight: bold;
+      color: #ff0080;
+      margin-bottom: 5px;
+    }
+    input {
+      width: 80%;
+      padding: 8px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      text-align: center;
+    }
+    button {
+      background: #ff0080;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+    button:hover {
+      background: #d6006d;
+    }
+    .result {
+      margin-top: 10px;
+      font-size: 18px;
+      font-weight: bold;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="header">Calculette de l'Indice de Masse Corporelle (IMC)</div>
+    
+    <div class="radio-group">
+      <label>Vous êtes :</label>
+      <input type="radio" name="gender" value="female" checked style="width: 5%;"> Une femme
+      <input type="radio" name="gender" value="male" style="width: 5%;"> Un homme
+    </div>
+
+    <div class="input-row">
+      <div class="input-group">
+        <label for="age">Votre âge</label>
+        <input type="number" id="age" placeholder="Ex: 25">
+      </div>
+      <div class="input-group">
+        <label for="height">Votre taille (cm)</label>
+        <input type="number" id="height" placeholder="Ex: 170">
+      </div>
+      <div class="input-group">
+        <label for="weight">Votre poids (KG)</label>
+        <input type="number" id="weight" placeholder="Ex: 70">
+      </div>
+    </div>
+
+    <button onclick="
+      var height = document.getElementById('height').value / 100;
+      var weight = document.getElementById('weight').value;
+      var resultElem = document.getElementById('result');
+      if (height > 0 && weight > 0) {
+        var imc = weight / (height * height);
+        var resultText = 'Votre IMC est de ' + imc.toFixed(2);
+        if (imc < 18.5) {
+          resultText += ' - Vous êtes en insuffisance pondérale (maigreur).';
+        } else if (imc >= 18.5 && imc < 25) {
+          resultText += ' - Vous avez un poids normal.';
+        } else if (imc >= 25 && imc < 30) {
+          resultText += ' - Vous êtes en surpoids.';
+        } else {
+          resultText += ' - Vous êtes en obésité.';
+        }
+        resultElem.innerHTML = resultText;
+      } else {
+        resultElem.innerHTML = 'Veuillez entrer des valeurs valides.';
+      }
+    ">CALCULER</button>
+
+    <div class="result" id="result"></div>
+  </div>
+
+</body>
+</html>
+

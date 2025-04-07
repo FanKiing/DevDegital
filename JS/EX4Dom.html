@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajouter et Supprimer des Paragraphes</title>
+    <style>
+        #container {
+            margin-top: 10px;
+        }
+        p {
+            font-weight: bold;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <button id="addParagraphBtn">Ajouter un paragraphe</button>
+    <div id="container"></div>
+
+    <script>
+        let count = 1; 
+
+        document.getElementById("addParagraphBtn").addEventListener("click", function() {
+            let h2 = document.createElement("h2"); 
+            h2.textContent = "Cliquez pour supprimer - " + count; 
+            h2.addEventListener("click", function() {
+                this.remove(); 
+            });
+            document.getElementById("container").appendChild(h2);
+            count++; 
+
+
+        });
+    </script>
+    <button id="deleteAllParagraphsBtn">Supprimer tout</button>
+    <script>
+        document.getElementById("deleteAllParagraphsBtn").addEventListener("click", function() {
+            let paragraphs = document.querySelectorAll("h2"); 
+            paragraphs.forEach(function(paragraph) {
+                paragraph.remove(); 
+            });
+        });
+    </script>
+
+</body>
+</html>

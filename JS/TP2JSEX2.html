@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Constituer votre PC</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            font-family: 'Consolas', sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            width: 400px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .section {
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        h2 {
+            margin-top: 0;
+            color: #555;
+            font-size: 1.2em;
+        }
+
+        .options {
+            margin-bottom: 10px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        select, input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        .calculate {
+            text-align: center;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        #prix {
+            font-weight: bold;
+            margin-left: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Constituer votre PC</h1>
+
+        <div class="section">
+            <h2>Carte mère</h2>
+            <select id="motherboard">
+                <option value="">Choisir une Carte mère</option>
+                <option value="asus">Asus</option>
+                <option value="via">Via</option>
+                <option value="sis">Sis</option>
+            </select>
+        </div>
+
+        <div class="section">
+            <h2>Écran</h2>
+            <div class="options">
+                <h4>Type :</h4>
+                <label><input type="radio" name="type" value="plat"> Plat</label>
+                <label><input type="radio" name="type" value="cathodique"> Cathodique</label>
+            </div>
+            <div class="options">
+                <h4>Taille :</h4>
+                <label><input type="radio" name="taille" value="15"> 15"</label>
+                <label><input type="radio" name="taille" value="17"> 17"</label>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Options</h2>
+            <label><input type="checkbox" id="satellite"> Carte Satellite</label>
+            <label><input type="checkbox" id="imprimante"> Imprimante</label>
+            <label><input type="checkbox" id="scanner"> Scanner</label>
+        </div>
+
+        <div class="section">
+            <h2>Catégorie</h2>
+            <select id="category">
+                <option value="">Choisir une Catégorie</option>
+                <option value="etudiants">Étudiants</option>
+                <option value="autres">Autres</option>
+            </select>
+        </div>
+
+        <div class="section">
+            <label for="reduction">Taux de réduction correspondant:</label>
+            <input type="text" id="reduction" name="reduction">
+        </div>
+
+        <div class="calculate">
+            <button id="calculate">Calculer prix</button>
+            <p>Ce PC vous coûtera: <span id="prix"></span></p>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const prixSpan = document.getElementById('prix');
+            const calculateButton = document.getElementById('calculate');
+
+            calculateButton.addEventListener('click', () => {
+                let totalPrice = 0;
+                const motherboard = document.getElementById('motherboard').value;
+                if (motherboard === 'asus') totalPrice += 700;
+                else if (motherboard === 'via') totalPrice += 600;
+                else if (motherboard === 'sis') totalPrice += 500;
+
+                const screenType = document.querySelector('input[name="type"]:checked');
+                const screenSize = document.querySelector('input[name="taille"]:checked');
+                if (screenType && screenSize) {
+                    if (screenType.value === 'plat') {
+                        totalPrice += screenSize.value === '15' ? 1500 : 2000;
+                    } else {
+                        totalPrice += screenSize.value === '15' ? 1000 : 1500;
+                    }
+                }
+
+                if (document.getElementById('satellite').checked) totalPrice += 900;
+                if (document.getElementById('imprimante').checked) totalPrice += 600;
+                if (document.getElementById('scanner').checked) totalPrice += 600;
+
+                const reductionPercentage = parseFloat(document.getElementById('reduction').value) || 0;
+                totalPrice *= (1 - reductionPercentage / 100);
+                totalPrice *= 1.05;
+                prixSpan.textContent = `${totalPrice.toFixed(2)} DH`;
+            });
+        });
+    </script>
+</body>
+</html>

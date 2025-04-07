@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galerie d'Images avec Animation</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            text-align: center;
+            margin: 50px;
+        }
+
+        #toggleCheckbox {
+            display: none;
+        }
+
+        #toggleButton {
+            padding: 15px 30px;
+            font-size: 18px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        #toggleButton:hover {
+            background-color: #45a049;
+        }
+
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 30px;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 1s ease-in-out, visibility 0s 1s;
+        }
+
+        .gallery-item {
+            width: 300px;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 1s ease-in-out, visibility 0s 1s;
+        }
+
+        #toggleCheckbox:checked + #toggleButton + .gallery {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        #toggleCheckbox:checked + #toggleButton + .gallery .gallery-item {
+            opacity: 1;
+            visibility: visible;
+            transition: opacity 1s ease-in-out, visibility 0s 0s;
+        }
+
+        .gallery-item:nth-child(1) {
+            transition-delay: 0.1s;
+        }
+
+        .gallery-item:nth-child(2) {
+            transition-delay: 0.2s;
+        }
+
+        .gallery-item:nth-child(3) {
+            transition-delay: 0.3s;
+        }
+
+        .gallery-item:nth-child(4) {
+            transition-delay: 0.4s;
+        }
+
+        .gallery-item:nth-child(5) {
+            transition-delay: 0.5s;
+        }
+
+        .gallery-item:nth-child(6) {
+            transition-delay: 0.6s;
+        }
+
+        h1 {
+            font-size: 36px;
+            color: #4CAF50;
+            margin-bottom: 20px;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.05);
+            transition: transform 0.3s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+    <h1>Galerie d'Images Animée</h1>
+    <input type="checkbox" id="toggleCheckbox">
+    <label for="toggleCheckbox" id="toggleButton">Afficher la galerie</label>
+
+    <div class="gallery" id="gallery">
+        <img src="image1.jpg" alt="Image 1" class="gallery-item">
+        <img src="image2.jpg" alt="Image 2" class="gallery-item">
+        <img src="image3.jpg" alt="Image 3" class="gallery-item">
+        <img src="image4.jpg" alt="Image 4" class="gallery-item">
+        <img src="image5.jpg" alt="Image 5" class="gallery-item">
+        <img src="image6.jpg" alt="Image 6" class="gallery-item">
+    </div>
+</body>
+</html>
+

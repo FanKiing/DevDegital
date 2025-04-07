@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page avec 3 Colonnes</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    gap: 20px;
+}
+
+
+.colonne {
+    flex: 1;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+
+@media (min-width: 1024px) {
+    .container {
+        flex-direction: row;
+    }
+
+
+    body {
+        font-size: 18px;
+    }
+
+    .colonne h2 {
+        font-size: 1.5em;
+    }
+
+
+    #colonne1 {
+        background-color: #d9f7be; 
+    }
+
+    #colonne2 {
+        background-color: #ffecb3; 
+    }
+
+    #colonne3 {
+        background-color: #ffb3b3;
+    }
+}
+
+@media (max-width: 1024px) and (min-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+
+    body {
+        font-size: 16px;
+    }
+
+    .colonne h2 {
+        font-size: 1.2em;
+    }
+
+    #colonne1 {
+        background-color: #d9f7be;
+    }
+
+    #colonne2 {
+        background-color: #ffecb3; 
+    }
+
+    #colonne3 {
+        background-color: #ffb3b3;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+
+    .colonne:nth-child(2),
+    .colonne:nth-child(3) {
+        display: none;
+    }
+
+    body {
+        font-size: 14px;
+    }
+
+    .colonne h2 {
+        font-size: 1em;
+    }
+
+    #colonne1 {
+        background-color: #d9f7be; 
+    }
+}
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="colonne" id="colonne1">
+            <h2>Colonne 1</h2>
+            <p>Contenu de la première colonne.</p>
+        </div>
+        <div class="colonne" id="colonne2">
+            <h2>Colonne 2</h2>
+            <p>Contenu de la deuxième colonne.</p>
+        </div>
+        <div class="colonne" id="colonne3">
+            <h2>Colonne 3</h2>
+            <p>Contenu de la troisième colonne.</p>
+        </div>
+    </div>
+
+</body>
+</html>

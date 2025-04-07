@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+</head>
+<body>
+    
+    <div class="container">
+
+        <div class="mb-3 d-flex justify-content-end"><button class="btn btn-primary" onclick="addProduct()" >add</button></div>
+<div class="mb-3">
+<table class="table table-hover" id="tblProducts">
+    <thead><tr><th>ID</th><th>Intitule</th><th>prix</th><th>actions</th></tr></thead>
+    <tbody></tbody>
+</table>
+
+
+</div>
+
+
+
+    </div>
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+        <script type="text/javascript">
+
+               let productsList=localStorage.getItem("products")?JSON.parse(localStorage.getItem("products")):[];
+
+                console.log(productsList);
+
+               const addProduct=()=>{
+                   const newProduct={id:(new Date()).getTime(),intitule:"p",prix:Math.ceil(Math.random()*2000)};
+                   //pour l id vous pouvez l uuid 
+                   productsList.push(newProduct);
+                   localStorage.setItem('products',JSON.stringify(productsList));
+
+                   alert('bien ajoute');
+
+               }
+
+
+               const fillTable=()=>{
+                let result=productsList.map((obj,pos)=>(`<tr><td>${obj.id}</td><td>${obj.intitule}</td><td>${obj.prix}</td><td><button onclick="deleteP(${pos})">delete</button></td></tr>`)).join('')
+                 console.log(result);
+
+                 document.querySelector('#tblProducts tbody').innerHTML=result;
+
+
+
+               }
+               fillTable();
+               const deleteP=(pos)=>{
+                if(confirm('are you sure you want to delet ?')){
+                productsList.splice(pos,1);
+
+                fillTable();
+                localStorage.setItem('products',JSON.stringify(productsList));
+                }
+
+
+               }
+            
+        </script>
+
+
+
+
+</body>
+</html>

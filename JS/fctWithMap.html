@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <script type="text/javascript">
+          /*const etudiants=[{num:100,nom:"etudiant1",age:11},{num:101,nom:"etudiant2",age:12},{num:102,nom:"etudiant3",age:13}];
+
+          const ages=etudiants.map((elt,index)=>elt.age);
+           console.log(ages);*/
+
+           const numbers=[12,11,15,6,8,7,20,23];
+          /* const EvenNumbers=new Array();
+           for(let elt of numbers){
+            if(elt%2==0){
+                EvenNumbers.push(elt);}
+           }
+           console.log(EvenNumbers);*/ 
+           //autrement
+           const EvenNumbers=numbers.filter((elt,pos)=>elt%2==0);
+          // console.log(EvenNumbers);
+
+          /*let som=0;
+          for(let x of numbers){
+            som=som+x;
+          }
+          console.log(som);*/  
+
+          let som=numbers.reduce((acc,x)=>acc+x,0);
+
+          //let produit=numbers.reduce((acc,x)=>acc*x,1);
+         /* let acc=1;
+          for(let x of numbers){
+              acc=acc+x
+
+          }
+          produit=acc;
+*/
+
+    </script>
+    
+</body>
+</html>

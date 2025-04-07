@@ -1,0 +1,36 @@
+from tkinter import *
+from tkinter import messagebox
+
+root=Tk()
+#define functions 
+counter=0
+def clicker(evt):
+    global counter
+    counter+=1
+    if counter%2==0:
+        message.config(text="Counter est pair")
+    else:
+        message.config(text="Counter est impair")
+    
+
+
+
+
+root.geometry('200x300')
+message=Label(root,text="Bonjour Le monde")
+message.pack(pady=10)
+#message.place(x=20,y=60)
+#btn=Button(root,text="Click Me !",command=clicker)
+# autrement
+btn=Button(root,text="Click Me !")
+#btn.config(command=clicker)
+
+"""def showMessage():
+    messagebox.showinfo('information','btn was clicked !!!!!!')"""
+
+btn.bind("<Button-1>",clicker)
+btn.pack()
+btnShow=Button(root,text="show Message !",command=lambda : messagebox.showinfo('info','bbtn  was clicked !!!!'))
+btnShow.pack()
+
+root.mainloop()

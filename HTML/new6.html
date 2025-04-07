@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        ul {
+            list-style-type: none;
+        }
+        ul li {
+            display: inline;
+            margin-right: 10px;
+        }
+        ul li::before {
+            content: "✓";
+            display: block;
+            clear: both;
+        }
+
+    </style>
+</head>
+<body>
+    <ul>
+        <li>Premier</li>
+        <li>Deuxième</li>
+        <li>Troisième</li>
+    </ul>
+
+</body>
+</html>

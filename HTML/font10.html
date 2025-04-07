@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        @font-face {
+          font-family: 'DesktopFont';
+          src: url('desktop-font.woff2') format('woff2');
+        }
+      
+        @font-face {
+          font-family: 'MobileFont';
+          src: url('mobile-font.woff2') format('woff2');
+        }
+      
+        body {
+          font-family: 'DesktopFont', sans-serif;
+        }
+      
+        @media (max-width: 600px) {
+          body {
+            font-family: 'MobileFont', sans-serif;
+          }
+        }
+     </style>
+</head>
+<body>
+    <p>Nothing is true.Everything is permitted</p>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            font-family: 'Consolas', sans-serif;
+            background-color: #fff;
+            color: #000;
+        }
+    </style>
+</head>
+<body>
+    <h1>Gestion de Stock</h1>
+    <form>
+        <label for="productName">Nom de produit:</label>
+        <input type="text" id="productName" placeholder="Nom de produit">
+        <label for="productPrice">Prix de produit:</label>
+        <input type="number" id="productPrice" placeholder="Prix de produit">
+        <button type="submit">Ajouter</button>
+    </form>
+
+    <h2>Liste des Produits</h2>
+    <ul>
+        <li>P1 - 100€</li>
+        <li>P2 - 50€</li>
+    </ul>
+
+    <h2>Supprimer un produit</h2>
+    <label for="productNameToDelete">Nom de Produit:</label>
+    <input type="text" id="productNameToDelete" placeholder="Nom de Produit">
+    <button type="button">Supprimer</button>
+
+    <h2>Rechercher par prix</h2>
+    <label for="minPrice">Prix minimum:</label>
+    <input type="number" id="minPrice" placeholder="Prix minimum">
+    <button type="button">Rechercher</button>
+</body>
+</html>

@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Commander des films</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Consolas, monospace;
+            background-color: #f0f0f0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background-color: #f8f9fa;
+        }
+
+        .navbar-brand img {
+            width: 50px;
+            height: auto;
+        }
+
+        .navbar-nav .nav-link {
+            font-family: Helvetica, sans-serif;
+            color: black;
+            padding: 10px 15px;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        button {
+            background-color: #ddd;
+            color: black;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #bbb;
+        }
+
+        #film-info {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        #film-image {
+            width: 200px;
+            height: auto;
+            margin-top: 10px;
+        }
+
+        #panier, #total {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body onload="charger()">
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <img src="movie.jpg" alt="Movies Station Logo"> MOVIES STATION
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
+                    <div class="dropdown me-3">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="genreDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                          Genre
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="genreDropdown">
+                          <li><a class="dropdown-item" href="#">Action</a></li>
+                          <li><a class="dropdown-item" href="#">Drama</a></li>
+                          <li><a class="dropdown-item" href="#">Comedy</a></li>
+                        </ul>
+                    </div>
+                    <li class="nav-item"><a class="nav-link" href="#" onclick="ajouterFilm()">Add Movies</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Log In</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <h1>Commander des films</h1>
+    <select id="film-select" onchange="afficher()">
+        <option value="" selected disabled>Choisir un film</option>
+    </select>
+    <div id="film-info">
+        <h2 id="film-titre"></h2>
+        <img id="film-image" src="movie.gif" alt="Image du film">
+        <p id="film-prix"></p>
+    </div>
+    <button onclick="ajouter()">Ajouter au panier</button>
+    <button onclick="retirer()">Retirer du panier</button>
+    <div id="panier"></div>
+    <div id="total"></div>
+
+    <script>
+        const films = [
+            { ID: "001", titre: "WALL-E", image: "wall-e.jpg", prix: 10 },
+            { ID: "002", titre: "Rise of the Guardians", image: "rise-of-the-guardians.jpg", prix: 15 },
+            { ID: "003", titre: "The Wild Robot", image: "the-wild-robot.jpg", prix: 12 }
+        ];
+
+        let panier = [];
+        let total = 0;
+
+        function charger() {
+            const select = document.getElementById('film-select');
+            films.forEach(film => {
+                const option = document.createElement('option');
+                option.value = film.ID;
+                option.textContent = film.titre;
+                select.appendChild(option);
+            });
+        }
+
+        function afficher() {
+            const filmId = document.getElementById('film-select').value;
+            const film = films.find(f => f.ID === filmId);
+            if (film) {
+                document.getElementById('film-titre').textContent = film.titre;
+                document.getElementById('film-image').src = film.image;
+                document.getElementById('film-image').alt = film.titre;
+                document.getElementById('film-prix').textContent = `Prix: $${film.prix}`;
+            }
+        }
+
+        function mettreAJourPanier() {
+            document.getElementById('panier').textContent = `Panier: ${panier.map(f => f.titre).join(', ') || 'Vide'}`;
+            document.getElementById('total').textContent = `Total: $${total}`;
+        }
+
+        function ajouter() {
+            const filmId = document.getElementById('film-select').value;
+            if (!filmId) {
+                alert("Veuillez sélectionner un film.");
+                return;
+            }
+            const film = films.find(f => f.ID === filmId);
+            if (film) {
+                panier.push(film);
+                total += film.prix;
+                mettreAJourPanier();
+            }
+        }
+
+        function retirer() {
+            const filmId = document.getElementById('film-select').value;
+            const index = panier.findIndex(f => f.ID === filmId);
+            if (index !== -1) {
+                total -= panier[index].prix;
+                panier.splice(index, 1);
+                mettreAJourPanier();
+            } else {
+                alert("Ce film n'est pas dans le panier.");
+            }
+        }
+        function ajouterFilm() {
+            const titre = prompt("Entrez le nom du film:");
+            const image = prompt("Entrez l'URL de la couverture du film:");
+            const prix = parseFloat(prompt("Entrez le prix du film:") || 0);
+
+            if (titre && image && !isNaN(prix) && prix > 0) {
+                const newFilm = { ID: String(films.length + 1).padStart(3, '0'), titre, image, prix };
+                films.push(newFilm);
+
+                const select = document.getElementById('film-select');
+                const option = document.createElement('option');
+                option.value = newFilm.ID;
+                option.textContent = newFilm.titre;
+                select.appendChild(option);
+            } else {
+                alert("Veuillez entrer des valeurs valides.");
+            }
+        }
+    </script>
+</body>
+</html>

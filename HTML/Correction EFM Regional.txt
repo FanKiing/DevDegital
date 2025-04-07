@@ -1,0 +1,31 @@
+1-<p align = justify> représente la justification d'alignement d'une paragraphe.
+2-les attribut universel se sont tous les éléments HTML, y compris pour les éléments non définis dans le standard.
+Exemple:
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+</head>
+<body>
+</body>
+</html>
+3-La basile <optgroup> regroupe les options associées dans un élément .
+4-le sélecteur universel est un sélecteur qui cible tous les éléments d'une page web, il se présence par (*)
+5-Le moteur de rendu est un logiciel qui trace du texte et des images dans un page web.
+le moteur de rendu utilisé par Firefox est Genko.
+6-le type du chemin est relatif.
+7-pour cibler les éléments impairs en utilise le code suivant:
+
+li:nth-child(odd):nth-child(n+3) {
+    color: red; 
+}
+8-a
+9-b
+10- le code :
+
+@media (min-width: 576px) and (max-width: 786px) {
+    .menu a {
+        color: orange;
+    }
+}
+
+

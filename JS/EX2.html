@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CalculerPret</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: 'Consolas', sans-serif;
+            margin: 20px;
+            max-width: 600px;
+        }
+
+        input, button {
+            display: block;
+            margin: 10px 0;
+            padding: 8px;
+            width: 100%;
+            background-color: #ddd;
+        }
+
+        .result {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            background-color: #f9f9f9;
+        }
+    </style>
+</head>
+<body>
+    <h2>Simulateur de prêt</h2>
+
+    <label>Montant emprunté</label>
+    <input type="number" id="montant" placeholder="Ex:50000">
+
+    <label>Taux d'intérêt annuel</label>
+    <input type="number" id="tauxAnnuel" placeholder="Ex:0.04">
+
+    <label>Durée du prêt (mois)</label>
+    <input type="number" id="duree" placeholder="Ex:15 mois">
+
+    <label>Date de début du prêt</label>
+    <input type="date" id="dateDebut">
+
+    <button onclick="calculerPret()">Calculer</button>
+    <button type="reset">Reset</button>
+
+    <div class="result" id="resultat"></div>
+
+    <script>
+        function calculerPret() {
+            let montant = parseFloat(document.getElementById("montant").value);
+            let tauxAnnuel = parseFloat(document.getElementById("tauxAnnuel").value); 
+            let duree = parseFloat(document.getElementById("duree").value);
+            let dateDebut = new Date(document.getElementById("dateDebut").value);
+
+            if (isNaN(montant) || isNaN(tauxAnnuel) || isNaN(duree) || isNaN(dateDebut.getTime())) {
+                alert("Veuillez remplir tous les champs correctement.");
+                return;
+            }
+
+            let tauxMensuel = (tauxAnnuel / 12) / 100;
+            let mensualite = (montant * tauxAnnuel) / (1 - Math.pow(1 + tauxMensuel, -duree));
+            mensualite = mensualite.toFixed(2);
+
+            let dateFin = new Date(dateDebut);
+            dateFin.setMonth(dateFin.getMonth() + duree);
+            let dateFinFormat = dateFin.toLocaleDateString();
+
+            let soldeRestant = montant;
+            let resultHTML = `<p><strong>Date de fin du prêt :</strong> ${dateFinFormat}</p>`;
+            resultHTML += `<p><strong>Montant des mensualités :</strong> ${mensualite} €</p>`;
+            resultHTML += `<h3>Liste des échéances :</h3><ul>`;
+
+            let currentDate = new Date(dateDebut);
+            for (let i = 1; i <= duree; i++) {
+                currentDate.setMonth(currentDate.getMonth() + 1);
+
+                let interets = soldeRestant * tauxMensuel; 
+
+                let capitalRembourse = mensualite - interets;
+
+                soldeRestant -= capitalRembourse;
+
+                resultHTML += `<li>Mois ${i} (${currentDate.toLocaleDateString()}): 
+                    Intérêts: ${interets.toFixed(2)} €, 
+                    Capital remboursé: ${capitalRembourse.toFixed(2)} €, 
+                    Solde restant: ${soldeRestant.toFixed(2)} €</li>`;
+            }
+            resultHTML += `</ul>`;
+
+            document.getElementById("resultat").innerHTML = resultHTML;
+        }
+    </script>
+</body>
+</html>

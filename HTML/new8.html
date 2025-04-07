@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Surlignage avec ::before</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .highlight {
+    position: relative;
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    }
+
+        .highlight::before {
+    content: ''; 
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: yellow; 
+    z-index: -1; 
+    width: 110%; 
+    height: 120%;
+    top: -10%; 
+    left: -5%; 
+}
+    </style>
+</head>
+<body>
+    <span class="highlight">Voici un texte surligné</span>
+</body>
+</html>

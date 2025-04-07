@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EFM JavaScript V2</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: 'Consolas', sans-serif;
+            background-color: #ddd;
+        }
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        input[type="number"]::-webkit-outer-spin-button,
+        input[type="number"]::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        .table-responsive {
+            margin-top: 20px;
+        }
+        .total-section {
+            margin-top: 20px;
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center mb-4">Editer une facture</h1>
+        <form id="invoiceForm">
+            <div class="mb-3">
+                <label for="ID" class="form-label">Code article :</label>
+                <input type="number" id="ID" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label for="titre" class="form-label">Libellé :</label>
+                <input type="text" id="titre" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label for="quantity" class="form-label">Quantité :</label>
+                <input type="number" id="quantity" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label for="price" class="form-label">Prix unitaire HT :</label>
+                <input type="number" id="price" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label for="tva" class="form-label">Taux de TVA :</label>
+                <select name="tva" id="tva" class="form-select" required>
+                    <option value="" hidden></option>
+                    <option value="20">20%</option>
+                    <option value="14">14%</option>
+                    <option value="10">10%</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Ajouter</button>
+            <button type="button" class="btn btn-primary" onclick="updateTotals()">Calculer Le total de la facture</button>
+        </form>
+
+        <div class="table-responsive mt-4">
+            <table class="table table-striped table-bordered text-center">
+                <thead class="table-light">
+                    <tr>
+                        <th>Code article</th>
+                        <th>Libellé</th>
+                        <th>Quantité</th>
+                        <th>Prix unitaire HT</th>
+                        <th>Taux de TVA</th>
+                        <th>Prix Total HT</th>
+                        <th>Prix Total TTC</th>
+                        <th>Supprimer</th>
+                    </tr>
+                </thead>
+                <tbody id="myProduct"></tbody>
+            </table>
+        </div>
+
+        <div class="total-section">
+            <p>Total HT: <span id="totalHT">0.00</span> €</p>
+            <p>Total TTC: <span id="totalTTC">0.00</span> €</p>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', function () {
+            document.getElementById('invoiceForm').addEventListener('submit', function (e) {
+                e.preventDefault();
+
+                const id = document.getElementById('ID').value;
+                const title = document.getElementById('titre').value;
+                const quantity = parseFloat(document.getElementById('quantity').value);
+                const price = parseFloat(document.getElementById('price').value);
+                const tva = parseFloat(document.getElementById('tva').value);
+
+                const totalHT = quantity * price;
+                const totalTTC = totalHT * (1 + tva / 100);
+
+                const tableBody = document.getElementById('myProduct');
+                const newRow = document.createElement('tr');
+
+                newRow.innerHTML = `
+                    <td>${id}</td>
+                    <td>${title}</td>
+                    <td>${quantity}</td>
+                    <td>${price.toFixed(2)} €</td>
+                    <td>${tva}%</td>
+                    <td>${totalHT.toFixed(2)} €</td>
+                    <td>${totalTTC.toFixed(2)} €</td>
+                    <td><button class="btn btn-danger btn-sm" onclick="deleteRow(this)">Supprimer</button></td>
+                `;
+
+                tableBody.appendChild(newRow);
+
+                updateTotals();
+                document.getElementById('invoiceForm').reset();
+            });
+        });
+
+        function deleteRow(button) {
+            const row = button.closest('tr');
+            row.remove();
+            updateTotals();
+        }
+
+        function updateTotals() {
+            const rows = document.querySelectorAll('#myProduct tr');
+            let totalHT = 0;
+            let totalTTC = 0;
+
+            rows.forEach(row => {
+                totalHT += parseFloat(row.cells[5].textContent);
+                totalTTC += parseFloat(row.cells[6].textContent);
+            });
+
+            document.getElementById('totalHT').textContent = totalHT.toFixed(2);
+            document.getElementById('totalTTC').textContent = totalTTC.toFixed(2);
+        }
+    </script>
+</body>
+</html>

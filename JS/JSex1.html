@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        .calculatrice {
+            max-width: 300px;
+            margin: 0 auto;
+        }
+
+        .calculatrice label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+
+        .calculatrice input[type="text"] {
+            width: 100%;
+            padding: 5px;
+            margin-bottom: 10px;
+        }
+
+        .calculatrice button {
+            margin: 5px;
+            padding: 5px 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculatrice">
+        <h2>Calculatrice</h2>
+        <label for="valeur1">Valeur 1</label>
+        <input type="text" id="valeur1" placeholder="Valeur 1">
+        <label>Operation :</label>
+        <div id="operation">
+            <input type="radio" name="operation" value="+" id="add" checked> + 
+            <input type="radio" name="operation" value="-" id="subtract"> - 
+            <input type="radio" name="operation" value="*" id="multiply"> * 
+            <input type="radio" name="operation" value="/" id="divide"> /
+        </div>
+
+        <label for="valeur2">Valeur 2</label>
+        <input type="text" id="valeur2" placeholder="Valeur 2">
+
+        <button id="calculer">Calculer</button>
+        <button id="initialiser">Initialiser</button>
+
+        <label for="resultat">Resultat</label>
+        <input type="text" id="resultat" placeholder="Resultat" readonly>
+    </div>
+
+    <script type="text/javascript">
+        const operationRadios = document.querySelectorAll('input[name="operation"]');
+        const calculerButton = document.getElementById('calculer');
+
+        operationRadios.forEach(radio => {
+            radio.addEventListener('change', () => { // corrected 'charge' to 'change'
+                switch (radio.value) {
+                    case '+':
+                        calculerButton.textContent = 'Additionner';
+                        break;
+                    case '-':
+                        calculerButton.textContent = 'Soustraire';
+                        break;
+                    case '*':
+                        calculerButton.textContent = 'Multiplier';
+                        break;
+                    case '/':
+                        calculerButton.textContent = 'Diviser';
+                        break;
+                }
+            })
+        })
+
+        const initialiserButton = document.getElementById('initialiser');
+        initialiserButton.addEventListener('click', () => {
+            document.getElementById('valeur1').value = '';
+            document.getElementById('valeur2').value = '';
+            document.getElementById('resultat').value = '';
+            document.getElementById('valeur1').focus();
+        });
+
+        calculerButton.addEventListener('click', () => {
+            const valeur1 = parseFloat(document.getElementById('valeur1').value);
+            const valeur2 = parseFloat(document.getElementById('valeur2').value);
+            const operation = document.querySelector('input[name="operation"]:checked').value;
+            let resultat;
+
+            if (isNaN(valeur1) || isNaN(valeur2)) {
+                alert('Veuillez entrer des nombres valides pour les deux valeurs.');
+                return;
+            }
+
+            switch (operation) {
+                case '+':
+                    resultat = valeur1 + valeur2;
+                    break;
+                case '-':
+                    resultat = valeur1 - valeur2;
+                    break;
+                case '*':
+                    resultat = valeur1 * valeur2;
+                    break;
+                case '/':
+                    if (valeur2 === 0) {
+                        alert('Division par zéro impossible.');
+                        return;
+                    }
+                    resultat = valeur1 / valeur2;
+                    break;
+                default:
+                    alert('Opération inconnue.');
+                    return;
+            }
+
+            document.getElementById('resultat').value = resultat;
+        });
+    </script>
+</body>
+</html>
